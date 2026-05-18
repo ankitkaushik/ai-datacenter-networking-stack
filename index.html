@@ -55,17 +55,36 @@
     border: 1px solid transparent;
     white-space: nowrap;
   }
+  /* Scale-up (intra-rack) — yellow family */
+  .b-nvl { background: rgba(210,153,34,.18); color: #e3b349; border-color: #4f3b0e; }
+  .b-ual { background: rgba(88,166,255,.15); color: #79b8ff; border-color: #1d3a5c; }
+  .b-ici { background: rgba(247,120,186,.15); color: #f9a3ce; border-color: #5a2745; }
+  .b-cxl { background: rgba(57,197,207,.15); color: #5ed2db; border-color: #1d3f43; }
+  /* Scale-out (rack-to-rack) — red/green family */
   .b-ib { background: rgba(248,81,73,.15); color: #ff8a82; border-color: #5b1f1c; }
   .b-roce { background: rgba(63,185,80,.15); color: #58d068; border-color: #1d4022; }
   .b-spx { background: rgba(188,140,255,.15); color: #d4b3ff; border-color: #3b2655; }
-  .b-eth { background: rgba(57,197,207,.15); color: #5ed2db; border-color: #1d3f43; }
-  .b-cpo { background: rgba(255,155,65,.15); color: #ffb37a; border-color: #5a3a1c; }
-  .b-lpo { background: rgba(247,120,186,.15); color: #f9a3ce; border-color: #5a2745; }
-  .b-nvl { background: rgba(210,153,34,.18); color: #e3b349; border-color: #4f3b0e; }
-  .b-ual { background: rgba(88,166,255,.15); color: #79b8ff; border-color: #1d3a5c; }
+  .b-srd { background: rgba(255,155,65,.15); color: #ffb37a; border-color: #5a3a1c; }
+  .b-falcon { background: rgba(247,120,186,.15); color: #f9a3ce; border-color: #5a2745; }
+  .b-mrc { background: rgba(57,197,207,.15); color: #5ed2db; border-color: #1d3f43; }
+  .b-iwarp { background: rgba(139,148,158,.18); color: #c9d1d9; border-color: #444c56; }
+  .b-sonic { background: rgba(88,166,255,.15); color: #79b8ff; border-color: #1d3a5c; }
+  .b-jupiter { background: rgba(210,153,34,.18); color: #e3b349; border-color: #4f3b0e; }
+  .b-omnipath { background: rgba(248,81,73,.15); color: #ff8a82; border-color: #5b1f1c; }
+  /* Comms libs */
   .b-nccl { background: rgba(210,153,34,.18); color: #e3b349; border-color: #4f3b0e; }
   .b-rccl { background: rgba(248,81,73,.15); color: #ff8a82; border-color: #5b1f1c; }
   .b-mscl { background: rgba(57,197,207,.15); color: #5ed2db; border-color: #1d3f43; }
+  /* Optical strategies — orange/pink family */
+  .b-cpo { background: rgba(255,155,65,.15); color: #ffb37a; border-color: #5a3a1c; }
+  .b-lpo { background: rgba(247,120,186,.15); color: #f9a3ce; border-color: #5a2745; }
+  .b-lro { background: rgba(63,185,80,.15); color: #58d068; border-color: #1d4022; }
+  .b-npo { background: rgba(188,140,255,.15); color: #d4b3ff; border-color: #3b2655; }
+  .b-oci { background: rgba(57,197,207,.15); color: #5ed2db; border-color: #1d3f43; }
+  .b-apollo { background: rgba(210,153,34,.18); color: #e3b349; border-color: #4f3b0e; }
+  .b-interposer { background: rgba(88,166,255,.15); color: #79b8ff; border-color: #1d3a5c; }
+  /* Misc — neutral grey for non-protocol descriptors */
+  .b-eth { background: rgba(139,148,158,.15); color: #c9d1d9; border-color: #444c56; }
   .b-inhouse { background: rgba(63,185,80,.20); color: #6fd47e; border-color: #1d4022; font-weight: 700; }
 
   .layer {
@@ -181,13 +200,37 @@
     font-size: 11.5px;
     color: #ffc89a;
   }
+
+  .refs-section { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-top: 20px; }
+  .refs-section h2 { color: var(--accent); font-size: 16px; margin: 0 0 4px 0; }
+  .refs-section .refs-sub { color: var(--muted); font-size: 11.5px; margin-bottom: 14px; }
+  .refs-grid { columns: 1; max-height: none; }
+  .refitem {
+    font-size: 11.5px; line-height: 1.5; padding: 7px 9px;
+    border-left: 3px solid var(--border); margin-bottom: 6px;
+    background: var(--panel-2); border-radius: 4px;
+    word-break: break-word;
+  }
+  .refitem:target { border-left-color: var(--accent); background: rgba(88,166,255,.08); }
+  .refnum { font-weight: 700; color: var(--accent); margin-right: 4px; }
+  .refitem a { color: var(--cyan); text-decoration: none; }
+  .refitem a:hover { text-decoration: underline; }
+  .cite a, .deps a { color: inherit; text-decoration: none; }
+  .cite a:hover, .deps a:hover { text-decoration: underline; color: var(--accent); }
+  .backtotop {
+    display: inline-block; margin-top: 10px; padding: 4px 10px;
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 4px;
+    color: var(--accent); font-size: 11px; text-decoration: none;
+  }
+  html { scroll-behavior: smooth; }
+
 </style>
 </head>
 <body>
 
-<h1>AI Datacenter Networking Supply Chain — Market Map</h1>
+<h1 id="top">AI Datacenter Networking Supply Chain — Market Map</h1>
 <div class="subtitle">5-layer view of frontier AI compute &rarr; hyperscalers &rarr; networking suppliers &rarr; optical components &rarr; physical / packaging.
-Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Market_Map_References.md</code>. Verified May 14, 2026.</div>
+Click any citation number <span class="cite">[#]</span> to jump to its source in the <a href="#references">References</a> section at the bottom. Verified May 17, 2026</div>
 
 <div class="legend">
   <strong>Legend</strong>
@@ -198,17 +241,42 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
     <div class="legend-item"><span class="swatch" style="border-left:4px solid var(--cyan); background:var(--panel-2);"></span>End-user / infra (no silicon claim)</div>
   </div>
   <div class="legend-row" style="margin-top:8px;">
-    <span class="badge b-ib">InfiniBand</span>
-    <span class="badge b-roce">RoCEv2 / UEC</span>
-    <span class="badge b-spx">Spectrum-X (NV)</span>
-    <span class="badge b-eth">Non-NV Ethernet</span>
+    <strong style="margin-right:4px;">Scale-up:</strong>
     <span class="badge b-nvl">NVLink</span>
     <span class="badge b-ual">UALink</span>
-    <span class="badge b-cpo">CPO</span>
-    <span class="badge b-lpo">LPO</span>
+    <span class="badge b-ici">Google ICI</span>
+    <span class="badge b-cxl">PCIe / CXL</span>
+  </div>
+  <div class="legend-row" style="margin-top:6px;">
+    <strong style="margin-right:4px;">Scale-out:</strong>
+    <span class="badge b-ib">InfiniBand</span>
+    <span class="badge b-omnipath">Omni-Path</span>
+    <span class="badge b-roce">RoCEv2 / UEC</span>
+    <span class="badge b-spx">Spectrum-X (NV)</span>
+    <span class="badge b-srd">AWS SRD</span>
+    <span class="badge b-falcon">Google Falcon</span>
+    <span class="badge b-mrc">MRC</span>
+    <span class="badge b-iwarp">iWARP</span>
+    <span class="badge b-sonic">SONiC (NOS)</span>
+    <span class="badge b-jupiter">Google Jupiter SDN</span>
+  </div>
+  <div class="legend-row" style="margin-top:6px;">
+    <strong style="margin-right:4px;">Libraries:</strong>
     <span class="badge b-nccl">NCCL</span>
     <span class="badge b-rccl">RCCL</span>
     <span class="badge b-mscl">MSCCL</span>
+  </div>
+  <div class="legend-row" style="margin-top:6px;">
+    <strong style="margin-right:4px;">Optical:</strong>
+    <span class="badge b-cpo">CPO</span>
+    <span class="badge b-lpo">LPO</span>
+    <span class="badge b-lro">LRO</span>
+    <span class="badge b-npo">NPO</span>
+    <span class="badge b-oci">OCI / Photonic Fabric</span>
+    <span class="badge b-apollo">Apollo OCS</span>
+    <span class="badge b-interposer">Optical Interposer</span>
+  </div>
+  <div class="legend-row" style="margin-top:6px;">
     <span class="badge b-inhouse">★ In-house networking</span>
   </div>
 </div>
@@ -242,7 +310,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       <div class="name">Google DeepMind</div>
       <div class="sub">Gemini, Veo</div>
       <div class="role">Trains on Google TPU pods (Ironwood: 9,216 chips / pod, 48 OCS units). Fully proprietary fabric — Jupiter SDN + Apollo OCS.</div>
-      <div class="badges"><span class="badge b-eth">Custom Ethernet+OCS</span><span class="badge b-inhouse">★ In-house</span></div>
+      <div class="badges"><span class="badge b-ici">ICI scale-up</span><span class="badge b-apollo">Apollo OCS</span><span class="badge b-jupiter">Jupiter SDN</span><span class="badge b-inhouse">★ In-house</span></div>
       <div class="deps"><span class="cite">[9][10][11][13]</span></div>
     </div>
 
@@ -250,7 +318,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       <div class="name">Meta AI / FAIR</div>
       <div class="sub">Llama 3 / 4 / 5</div>
       <div class="role">24K+ H100 RoCEv2 cluster on Arista 7800 + OCP Minipack2/Wedge400. Llama 3 was the Ethernet-vs-InfiniBand bake-off. Custom MTIA accelerators on Broadcom-built training systems.</div>
-      <div class="badges"><span class="badge b-roce">RoCEv2/UEC</span><span class="badge b-eth">Non-NV Ethernet</span><span class="badge b-nccl">NCCL</span></div>
+      <div class="badges"><span class="badge b-roce">RoCEv2/UEC</span><span class="badge b-nccl">NCCL</span></div>
       <div class="deps"><span class="cite">[5][6][7][8]</span></div>
     </div>
 
@@ -282,7 +350,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       <div class="name">Cohere</div>
       <div class="sub">Command R+, enterprise LLMs</div>
       <div class="role">Trains on Google Cloud TPUs and Oracle OCI. TPU pod uses Google's in-house OCS fabric.</div>
-      <div class="badges"><span class="badge b-eth">Custom Ethernet+OCS</span></div>
+      <div class="badges"><span class="badge b-ici">ICI scale-up</span><span class="badge b-apollo">Apollo OCS</span><span class="badge b-jupiter">Jupiter SDN</span></div>
       <div class="deps"><span class="cite">[9][12]</span></div>
     </div>
 
@@ -305,7 +373,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       <div class="name">Google Cloud Platform ★</div>
       <div class="sub">TPU + Jupiter + Apollo OCS</div>
       <div class="role"><strong>Deepest in-house stack.</strong> Designs TPU compute, Jupiter SDN-Ethernet fabric, and Apollo MEMS-based optical-circuit switches. 5× faster, 40% lower power, 30% lower capex vs. prior gen. Ironwood TPU pods use 48 OCS units to interconnect 9,216 chips.</div>
-      <div class="badges"><span class="badge b-inhouse">★ In-house OCS + fabric</span><span class="badge b-eth">Custom Ethernet</span></div>
+      <div class="badges"><span class="badge b-inhouse">★ In-house OCS + fabric</span><span class="badge b-ici">ICI</span><span class="badge b-apollo">Apollo OCS</span><span class="badge b-jupiter">Jupiter SDN</span><span class="badge b-falcon">Falcon</span></div>
       <div class="deps"><span class="cite">[9][10][11][12][13]</span></div>
     </div>
 
@@ -313,7 +381,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       <div class="name">AWS ★</div>
       <div class="sub">Annapurna Labs / Nitro / EFA / SRD</div>
       <div class="role">Designs Nitro DPU, the Elastic Fabric Adapter NIC, and a custom transport protocol — <strong>SRD (Scalable Reliable Datagram)</strong> — to bypass kernel and replace TCP/RoCE inside its fleet. Also designs Trainium/Inferentia accelerators.</div>
-      <div class="badges"><span class="badge b-inhouse">★ In-house NIC + protocol</span><span class="badge b-roce">RoCEv2 (legacy)</span></div>
+      <div class="badges"><span class="badge b-inhouse">★ In-house NIC + protocol</span><span class="badge b-srd">AWS SRD</span><span class="badge b-roce">RoCEv2 (legacy)</span></div>
       <div class="deps"><span class="cite">[14][15]</span></div>
     </div>
 
@@ -321,7 +389,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       <div class="name">Microsoft Azure ★</div>
       <div class="sub">SONiC + MAIA + custom optics</div>
       <div class="role">Created and open-sourced <strong>SONiC</strong> switch OS (runs on multi-vendor ASICs incl. Broadcom + NVIDIA Spectrum). Co-develops hollow-core fiber with Huber+Suhner. Designs MAIA accelerator. Still significant NVIDIA InfiniBand for inference.</div>
-      <div class="badges"><span class="badge b-inhouse">★ In-house OS + HCF</span><span class="badge b-roce">RoCEv2/UEC</span><span class="badge b-ib">InfiniBand</span><span class="badge b-mscl">MSCCL</span></div>
+      <div class="badges"><span class="badge b-inhouse">★ In-house OS + HCF</span><span class="badge b-sonic">SONiC (owner)</span><span class="badge b-roce">RoCEv2/UEC</span><span class="badge b-ib">InfiniBand</span><span class="badge b-mscl">MSCCL</span></div>
       <div class="deps"><span class="cite">[16][17][18][59][84]</span></div>
     </div>
 
@@ -433,8 +501,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       </div>
       <div class="badges">
         <span class="badge b-roce">RoCEv2/UEC</span>
-        <span class="badge b-eth">Non-NV Ethernet</span>
-        <span class="badge b-cpo">CPO (Davisson)</span>
+                <span class="badge b-cpo">CPO (Davisson)</span>
         <span class="badge b-ual">SUE/UALink</span>
       </div>
       <div class="deps"><span class="cite">[26][27][28][73][76]</span></div>
@@ -442,18 +509,20 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
 
     <div class="card builder">
       <div class="name">Marvell (MRVL)</div>
-      <div class="sub">switch · optical DSP · SiPho (Inphi + Celestial AI)</div>
+      <div class="sub">switch · optical DSP · SiPho · CXL switch (4 acquisitions)</div>
       <div class="role">
-        <strong>Optical DSPs:</strong> Alaska A 1.6T (AEC) and Alaska C / Spica (PAM4) — directly derived from $10B 2021 Inphi acquisition.<br>
-        <strong>Silicon photonics:</strong> Inphi SiPho + <strong>Celestial AI</strong> Photonic Fabric chiplet (16 Tbps scale-up) — acquired Dec 2025 for $3.25B (up to $5.5B).<br>
+        <strong>Optical DSPs:</strong> Alaska A 1.6T (AEC) and Alaska C / Spica (PAM4) — from $10B 2021 <strong>Inphi</strong> acquisition.<br>
+        <strong>Silicon photonics:</strong> Inphi SiPho + <strong>Celestial AI</strong> Photonic Fabric chiplet (16 Tbps scale-up) — $3.25B (up to $5.5B) Dec 2025.<br>
+        <strong>CXL/PCIe switching:</strong> <strong>XConn</strong> (Apollo 2: hybrid CXL 3.1 + PCIe Gen 6.2, 256 lanes) — $540M closed Feb 2026.<br>
+        <strong>Plasmonics modulators:</strong> <strong>Polariton Technologies</strong> (ETH Zurich spin-out) — announced Apr 2026 for 3.2T+ scaling.<br>
         <strong>Switch ASICs:</strong> Teralynx Ethernet line + custom-ASIC business (AWS Trainium etc.).
       </div>
       <div class="badges">
         <span class="badge b-roce">RoCEv2/UEC</span>
-        <span class="badge b-eth">Non-NV Ethernet</span>
-        <span class="badge b-cpo">CPO</span>
+                <span class="badge b-cpo">CPO</span>
+        <span class="badge b-ual">UALink/CXL</span>
       </div>
-      <div class="deps"><span class="cite">[29][30][31][32]</span></div>
+      <div class="deps"><span class="cite">[29][30][31][32][123][124][125][126]</span></div>
     </div>
 
     <div class="card hybrid">
@@ -466,8 +535,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       </div>
       <div class="badges">
         <span class="badge b-roce">RoCEv2/UEC</span>
-        <span class="badge b-eth">Non-NV Ethernet</span>
-        <span class="badge b-lpo">LPO</span>
+                <span class="badge b-lpo">LPO</span>
       </div>
       <div class="deps"><span class="cite">[33][34][35]</span></div>
     </div>
@@ -486,8 +554,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       </div>
       <div class="badges">
         <span class="badge b-roce">RoCEv2/UEC</span>
-        <span class="badge b-eth">Non-NV Ethernet</span>
-      </div>
+              </div>
       <div class="deps">Silicon: Broadcom Tomahawk 5/6 + Jericho 3/4 <span class="cite">[36][37][38]</span></div>
     </div>
 
@@ -500,9 +567,76 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       </div>
       <div class="badges">
         <span class="badge b-roce">RoCEv2</span>
-        <span class="badge b-eth">Non-NV Ethernet</span>
-      </div>
+              </div>
       <div class="deps">Silicon: HPE Rosetta-2 / Cassini-2 (own) + Broadcom (Aruba) <span class="cite">[39][40]</span></div>
+    </div>
+
+  </div>
+
+
+  <div class="group-label">AI NICs / DPUs / Endpoint-RDMA silicon</div>
+  <div class="grid">
+
+    <div class="card builder">
+      <div class="name">NVIDIA — BlueField &amp; ConnectX (NICs)</div>
+      <div class="sub">DPU / SuperNIC line</div>
+      <div class="role"><strong>BlueField-3</strong> SuperNIC powers Spectrum-X clusters (xAI Colossus reference). <strong>ConnectX-8</strong> supports 800 Gb/s Ethernet + InfiniBand. <strong>Thor-equivalent</strong> for Quantum-X800. NVIDIA's NIC line is the in-house counterpart to AMD Pollara &amp; Intel E810.</div>
+      <div class="badges"><span class="badge b-ib">InfiniBand</span><span class="badge b-spx">Spectrum-X</span><span class="badge b-roce">RoCEv2</span></div>
+      <div class="deps">(Cross-reference with NVIDIA card above) <span class="cite">[22][23]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Intel — Ethernet 800 / E810</div>
+      <div class="sub">RoCEv2 + iWARP RDMA NICs</div>
+      <div class="role">Ethernet 800 Series (E810-CQDA2 etc.) is one of the only RDMA NICs supporting <strong>both</strong> RoCEv2 (UDP/IP) and iWARP (TCP/IP). 256K queue pairs; 10–200 GbE range. The conservative-IT alternative to AMD Pollara and NVIDIA BlueField.</div>
+      <div class="badges"><span class="badge b-roce">RoCEv2</span><span class="badge b-iwarp">iWARP</span></div>
+      <div class="deps"><span class="cite">[94][95]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">AMD Pensando — Pollara 400 / Vulcano 800</div>
+      <div class="sub">UEC NICs · MRC transport · DPU</div>
+      <div class="role"><strong>Pollara 400</strong> = industry-first UEC-ready AI NIC at 400 Gbps; co-validated with OpenAI on AMD Instinct MI350/MI355. <strong>Vulcano 800</strong> (Gen6 PCIe, 2026) brings full general-availability MRC support — the protocol AMD co-developed with OpenAI and contributed to OCP.</div>
+      <div class="badges"><span class="badge b-roce">RoCEv2/UEC</span><span class="badge b-rccl">RCCL</span></div>
+      <div class="deps"><span class="cite">[4][96][97][98][99]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Broadcom — Thor Ultra</div>
+      <div class="sub">800G AI Ethernet NIC</div>
+      <div class="role">Industry-first 800G AI Ethernet NIC; pairs with Tomahawk 6 / Jericho4 to give Broadcom an end-to-end UEC stack. Cross-reference with the Broadcom card above.</div>
+      <div class="badges"><span class="badge b-roce">RoCEv2/UEC</span></div>
+      <div class="deps">(Cross-reference with Broadcom card above) <span class="cite">[27]</span></div>
+    </div>
+
+  </div>
+
+
+  <div class="group-label">Pure-play scale-up fabric &amp; alternative-network challengers</div>
+  <div class="grid">
+
+    <div class="card builder">
+      <div class="name">Upscale AI (private)</div>
+      <div class="sub">SkyHammer™ scale-up ASIC · UALink/UEC/ESUN</div>
+      <div class="role">Pure-play AI networking startup. SkyHammer ASIC connects up to <strong>1,024 devices per rack</strong> via UALink 1.0 (200 Gb/s bidirectional, ~100–150 ns latency). Multi-standard: UALink, UEC, ESUN, SONiC. Raised ~$300M (Series A $200M, Jan 2026), unicorn status. Direct counterweight to NVLink/NVSwitch. Samples Q4 2026, volume 2027.</div>
+      <div class="badges"><span class="badge b-ual">UALink</span><span class="badge b-roce">UEC/ESUN</span><span class="badge b-sonic">SONiC</span></div>
+      <div class="deps"><span class="cite">[85][86][87][88]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Cornelis Networks</div>
+      <div class="sub">Omni-Path — direct InfiniBand alternative</div>
+      <div class="role">Intel spin-off (2020). <strong>CN5000</strong> 400G (48-port: 19.2 Tbps / 576-port director: 230.4 Tbps) shipping Q3 2025. Claims 2× message rate / 35% lower latency vs InfiniBand NDR; <strong>6× faster collectives vs. RoCE</strong> on AI workloads. <strong>CN6000</strong> 800G unifies Omni-Path + RoCE; <strong>CN7000</strong> 1.6T integrates UEC.</div>
+      <div class="badges"><span class="badge b-ib">Omni-Path (IB-class)</span><span class="badge b-roce">RoCE/UEC (CN6000+)</span></div>
+      <div class="deps"><span class="cite">[89][90][91]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Microchip Technology (MCHP)</div>
+      <div class="sub">PCIe Gen 6 switches · timing chips</div>
+      <div class="role"><strong>Switchtec Gen 6</strong> — industry-first 3 nm PCIe Gen 6 switch family: up to 160 lanes, 64 GT/s/lane, 20 ports, 10 internal stacks. ~15% power advantage per lane vs. 5 nm node. Competes with Astera Scorpio for the PCIe-fabric design slot.</div>
+      <div class="badges"><span class="badge b-ual">UALink/CXL/PCIe</span></div>
+      <div class="deps"><span class="cite">[92][93]</span></div>
     </div>
 
   </div>
@@ -524,15 +658,16 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
 
     <div class="card builder">
       <div class="name">Astera Labs (ALAB)</div>
-      <div class="sub">PCIe/CXL retimers · fabric switches · software</div>
+      <div class="sub">PCIe/CXL retimers · fabric switches · photonic chiplets (+aiXscale)</div>
       <div class="role">
-        <strong>Aries</strong> PCIe Gen 6 retimers (only one shipping in volume); <strong>Taurus</strong> Ethernet smart cables; <strong>Leo</strong> CXL memory controller; <strong>Scorpio P-Series</strong> PCIe 6 fabric switch (32–320 lanes, &gt;10% of 2025 revenue); <strong>COSMOS</strong> management software.
+        <strong>Aries</strong> PCIe Gen 6 retimers (only one shipping in volume); <strong>Taurus</strong> Ethernet smart cables; <strong>Leo</strong> CXL memory controller; <strong>Scorpio P-Series</strong> PCIe 6 fabric switch (32–320 lanes, &gt;10% of 2025 revenue); <strong>COSMOS</strong> management software.<br>
+        <strong>aiXscale Photonics</strong> (closed Nov 2025) — precision glass fiber-chip coupling IP for photonic scale-up chiplets.
       </div>
       <div class="badges">
-        <span class="badge b-eth">Non-NV Ethernet</span>
-        <span class="badge b-ual">UALink (PCIe/CXL)</span>
+                <span class="badge b-ual">UALink (PCIe/CXL)</span>
+        <span class="badge b-cpo">CPO (post-aiXscale)</span>
       </div>
-      <div class="deps"><span class="cite">[43][44][45]</span></div>
+      <div class="deps"><span class="cite">[43][44][45][121][122]</span></div>
     </div>
 
     <div class="card builder">
@@ -547,6 +682,30 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
         <span class="badge b-lpo">LPO supplier</span>
       </div>
       <div class="deps"><span class="cite">[46][47]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Semtech (SMTC)</div>
+      <div class="sub">LPO + 800G/1.6T transceivers · DFB lasers (HieFo)</div>
+      <div class="role">Driver-amplifier and TIA supplier for optical modules. Pioneered <strong>Linear Pluggable Optics (LPO)</strong> — removes power-hungry DSP from the module. March 2026: acquired <strong>HieFo</strong> for $34M, adding in-house DFB laser optoelectronics for IMDD links. Positioned to integrate electronic + optoelectronic + photonic chipsets.</div>
+      <div class="badges"><span class="badge b-lpo">LPO</span></div>
+      <div class="deps"><span class="cite">[100][101]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Alphawave Semi (now Qualcomm)</div>
+      <div class="sub">optical DSP (Banias) · SerDes IP</div>
+      <div class="role">Independent optical DSP + SerDes IP house. Acquired <strong>Banias Labs</strong> (2022, $240M) for data-center optical DSP silicon. <strong>Qualcomm closed $2.4B acquisition Dec 2025</strong> — folds Alphawave's IP into Qualcomm's data-center push alongside Oryon CPU + Hexagon NPU.</div>
+      <div class="badges"><span class="badge b-roce">RoCEv2/UEC</span></div>
+      <div class="deps"><span class="cite">[105][106]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Lightwave Logic (LWLG)</div>
+      <div class="sub">electro-optic polymer modulator IP</div>
+      <div class="role">Materials platform: proprietary EO polymers that replace Si/InP inside modulators — sub-2V drive at 100 GBaud PAM4. Partners with <strong>Tower</strong> (PH18 PDK) and <strong>GlobalFoundries</strong> (GDSFactory PDK on GF Fotonix, March 2026) for polymer-on-SiPho integration. Aims at 200G/400G per lane validation tape-outs.</div>
+      <div class="badges"><span class="badge b-lpo">Low-power LPO/CPO enabler</span></div>
+      <div class="deps">Foundries: Tower + GlobalFoundries (Layer 5) <span class="cite">[102][103][104]</span></div>
     </div>
 
   </div>
@@ -587,6 +746,30 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       <div class="deps"><span class="cite">[53][54][55]</span></div>
     </div>
 
+    <div class="card builder">
+      <div class="name">Lucidean (private)</div>
+      <div class="sub">CohZero™ "coherent-lite" IP</div>
+      <div class="role">Bridges IMDD and long-haul coherent: lets data-center modules adopt coherent-class link budgets without changing existing IMDD lasers / DSPs. Targets <strong>3.2 Tbps and 6.4 Tbps</strong> transceivers for AI fabrics, including CPO-compatible. $18M seed Dec 2025 led by Entrada + Koch Disruptive Tech.</div>
+      <div class="badges"><span class="badge b-cpo">CPO-compatible</span></div>
+      <div class="deps"><span class="cite">[107]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Neurophos (private)</div>
+      <div class="sub">metasurface optical processor (in-network compute)</div>
+      <div class="role">Duke / Metacept spin-out. Metasurface modulator acts as a tensor core that performs matrix-vector multiplication while data is still in flight as light — enabling "in-network" all-reduce in CPO modules. Test chip claims 300 TOPS/W. Raised $110M Jan 2026. First production chips mid-2028.</div>
+      <div class="badges"><span class="badge b-cpo">CPO-integrated compute</span></div>
+      <div class="deps"><span class="cite">[108][109]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Polaris Electro-Optics (private)</div>
+      <div class="sub">ferroelectric nematic glass + SiPho</div>
+      <div class="role">CMOS-compatible electro-optic modulator material — drop-in for SiPho processes. Claims <strong>400 Gbps/lane and beyond</strong> in pluggables or CPO form. Closed $10M Series A (2025) following $3M seed. UCSD / CU Boulder-affiliated, marked publicly as a "holy-grail" in-package optical I/O bet.</div>
+      <div class="badges"><span class="badge b-cpo">CPO/in-package I/O</span></div>
+      <div class="deps"><span class="cite">[110][111]</span></div>
+    </div>
+
   </div>
 
 
@@ -597,7 +780,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       <div class="name">Zhongji Innolight (300308.SZ)</div>
       <div class="sub">wraps <span class="arrow">→ Broadcom / Marvell DSP + Layer-4 EML</span></div>
       <div class="role">800G &amp; 1.6T (DR8 / 2×FR4 / 4×FR2) OSFP transceivers; ~60% of NVIDIA's incremental 800G shipments (shared with Eoptolink). Module assembly leader, not a chip designer.</div>
-      <div class="badges"><span class="badge b-eth">All Ethernet flavors</span><span class="badge b-ib">InfiniBand</span></div>
+      <div class="badges"><span class="badge b-roce">RoCEv2/UEC</span><span class="badge b-spx">Spectrum-X</span><span class="badge b-ib">InfiniBand</span></div>
       <div class="deps">DSP: Broadcom / Marvell · EML: Lumentum / Coherent <span class="cite">[56][58]</span></div>
     </div>
 
@@ -605,7 +788,7 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       <div class="name">Eoptolink (300502.SZ)</div>
       <div class="sub">wraps <span class="arrow">→ Broadcom / Marvell DSP + Layer-4 EML</span></div>
       <div class="role">800G + 1.6T DR8 / 2FR4 / 4FR2 OSFP-XD transceivers; LPO-compatible product lines. Industry-first multicore-fiber 800G at OFC.</div>
-      <div class="badges"><span class="badge b-eth">All Ethernet flavors</span><span class="badge b-lpo">LPO-ready</span></div>
+      <div class="badges"><span class="badge b-roce">RoCEv2/UEC</span><span class="badge b-spx">Spectrum-X</span><span class="badge b-ib">InfiniBand</span><span class="badge b-lpo">LPO-ready</span></div>
       <div class="deps">DSP: Broadcom / Marvell · EML: Lumentum / Coherent <span class="cite">[56][57]</span></div>
     </div>
 
@@ -747,6 +930,61 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
 
   </div>
 
+  <div class="group-label">Optical connectors &amp; CPO hardware (high-density / expanded-beam)</div>
+  <div class="grid">
+
+    <div class="card builder">
+      <div class="name">US Conec (private)</div>
+      <div class="sub">MMC connectors · PRIZM™ TMT expanded-beam ferrules</div>
+      <div class="role">Designs the <strong>MMC</strong> 16-/32-fiber compact connector and the <strong>PRIZM TMT</strong> expanded-beam ferrule — passive alignment, debris tolerance, blind-mate; <strong>3× density of MPO</strong>. Multi-source framework with Corning, Fujikura, Sumitomo Electric Lightwave. Standard physical interface for CPO/NPO architectures.</div>
+      <div class="badges"><span class="badge b-cpo">CPO/NPO interface</span></div>
+      <div class="deps"><span class="cite">[112][113]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Foxconn Interconnect Technology (FIT)</div>
+      <div class="sub">CPO sockets · PLS I/O cages · 102.4T laser platform</div>
+      <div class="role">Supplies key CPO hardware to <strong>Broadcom</strong>: solderless LGA-to-LGA sockets and <strong>Remote Pluggable Laser Source (PLS) I/O cages</strong>. Partnered with MediaTek on a 51.2T CPO co-development. FIT's <strong>102.4T CPO External Laser Solution</strong> has entered ecosystem validation.</div>
+      <div class="badges"><span class="badge b-cpo">CPO physical layer</span></div>
+      <div class="deps">Designed for Broadcom Tomahawk-6 / Davisson <span class="cite">[114][115]</span></div>
+    </div>
+
+  </div>
+
+  <div class="group-label">Composable / disaggregated infrastructure (CDI &amp; CXL pooling)</div>
+  <div class="grid">
+
+    <div class="card builder">
+      <div class="name">One Stop Systems (OSS)</div>
+      <div class="sub">PCIe 5.0 accelerator chassis · Ponto Reef</div>
+      <div class="role"><strong>Ponto Reef</strong> 32-slot PCIe 5.0 expansion system — industry-first 32 PCIe accelerator devices in a single chassis. Sold into CDI deployments for GenAI/ML, HPC, visualization. Initial AI-infrastructure design-win $2M PO, production Q1 2025.</div>
+      <div class="badges"><span class="badge b-ual">PCIe/CXL CDI</span></div>
+      <div class="deps"><span class="cite">[116][117]</span></div>
+    </div>
+
+    <div class="card builder">
+      <div class="name">Liqid (private)</div>
+      <div class="sub">composable GPU + CXL 2.0 memory pooling</div>
+      <div class="role">Leading independent CDI vendor (with GigaIO). EX-5410P 10-slot 600W GPU box supporting H200 / RTX Pro 6000 / Intel Gaudi 3 + <strong>up to 100 TB CXL 2.0 disaggregated memory pool</strong>. Memory-wall play complementary to Marvell/XConn switching silicon.</div>
+      <div class="badges"><span class="badge b-ual">CXL pooling</span></div>
+      <div class="deps"><span class="cite">[117][118]</span></div>
+    </div>
+
+  </div>
+
+  <div class="group-label">System management &amp; control silicon</div>
+  <div class="grid">
+
+    <div class="card builder">
+      <div class="name">Lattice Semiconductor (LSCC)</div>
+      <div class="sub">low-power FPGAs · DC-SCM · PQC root-of-trust</div>
+      <div class="role">"Companion-chip" strategy: small FPGAs that manage boot, security, control, and I/O adjacent to CPU/GPU/accelerators. <strong>70–130 FPGAs per hyperscaler rack</strong>. AI-server revenue +85% YoY in FY 2025. $1.65B AMI acquisition adds firmware orchestration for AI DCs. Certus-NX / MachXO5-NX with DC-SCM + post-quantum crypto.</div>
+      <div class="badges"><span class="badge b-eth">Rack control plane</span></div>
+      <div class="deps"><span class="cite">[119][120]</span></div>
+    </div>
+
+  </div>
+
   <div class="group-label">Advanced packaging &amp; silicon-photonics foundries (the CPO enablers)</div>
   <div class="grid">
 
@@ -786,49 +1024,228 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
 </div>
 
 
-<!-- =================== PROTOCOL MATRIX =================== -->
+<!-- =================== RECENT M&A SIDEBAR =================== -->
 <div class="layer">
   <div class="layer-header">
-    <div><span class="layer-num">★</span><h2 style="display:inline">Protocol / Architecture Alignment Matrix</h2></div>
-    <span class="layer-meta">Where the major Layer-3 players sit on the five live architectural fights.</span>
+    <div><span class="layer-num">M</span><h2 style="display:inline">Recent Networking M&amp;A — Innovators absorbed into Layer-3 mega-caps</h2></div>
+    <span class="layer-meta">The companies below were independent in 2024; now they live inside the parent stack shown.</span>
   </div>
+  <div class="grid">
+
+    <div class="card neutral">
+      <div class="name">aiXscale Photonics <span class="arrow">→ Astera Labs</span></div>
+      <div class="sub">closed Nov 2025</div>
+      <div class="role">German precision-glass <strong>fiber-to-chip coupling</strong> for photonic chiplets. Gives Astera Labs a credible CPO physical-layer story to bolt onto Scorpio/Aries.</div>
+      <div class="deps"><span class="cite">[121][122]</span></div>
+    </div>
+
+    <div class="card neutral">
+      <div class="name">XConn Technologies <span class="arrow">→ Marvell</span></div>
+      <div class="sub">$540M · closed Feb 10, 2026</div>
+      <div class="role">Industry-first <strong>hybrid CXL 3.1 + PCIe Gen 6.2 switch on a single chip</strong> (Apollo 2: 256 lanes, 2,048 Gbps). Pairs with Marvell's CXL memory controllers + Celestial AI photonics for full UALink/CXL stack. Direct shot at Astera Scorpio and Microchip Switchtec Gen 6.</div>
+      <div class="deps"><span class="cite">[123][124]</span></div>
+    </div>
+
+    <div class="card neutral">
+      <div class="name">Polariton Technologies <span class="arrow">→ Marvell</span></div>
+      <div class="sub">announced Apr 22, 2026</div>
+      <div class="role">Swiss / ETH Zurich spin-out — <strong>plasmonics-based silicon photonics</strong>. Ultra-high-bandwidth, low-power modulators for 3.2T+ coherent / DCI. Marvell's third 2025–26 optical acquisition after Celestial AI and XConn.</div>
+      <div class="deps"><span class="cite">[125][126]</span></div>
+    </div>
+
+    <div class="card neutral">
+      <div class="name">DustPhotonics <span class="arrow">→ Credo</span></div>
+      <div class="sub">$750M cash + ~0.92M shares · April 2026</div>
+      <div class="role">Israeli SiPho PIC house — 400G/800G/1.6T PIC with roadmap to 3.2T. Turns Credo into a vertically-integrated SerDes-to-SiPho competitor to Marvell.</div>
+      <div class="deps"><span class="cite">[41][42]</span></div>
+    </div>
+
+    <div class="card neutral">
+      <div class="name">Celestial AI <span class="arrow">→ Marvell</span></div>
+      <div class="sub">$3.25B (up to $5.5B) · Dec 2025</div>
+      <div class="role">Photonic Fabric chiplet — 16 Tbps single chiplet for scale-up optical I/O and disaggregated memory. Now the core of Marvell's chip-to-memory optics roadmap.</div>
+      <div class="deps"><span class="cite">[29][30][52]</span></div>
+    </div>
+
+    <div class="card neutral">
+      <div class="name">HieFo <span class="arrow">→ Semtech</span></div>
+      <div class="sub">$34M cash · March 2026</div>
+      <div class="role">InP DFB-laser optoelectronics. Pulls Semtech from a pure analog/LPO play into a vertically-integrated DSP-laser-driver chipset competitor.</div>
+      <div class="deps"><span class="cite">[100][101]</span></div>
+    </div>
+
+    <div class="card neutral">
+      <div class="name">Alphawave Semi (Banias Labs) <span class="arrow">→ Qualcomm</span></div>
+      <div class="sub">$2.4B Qualcomm deal · closed Dec 2025</div>
+      <div class="role">Optical DSP + SerDes IP. Effectively gives Qualcomm a credible data-center networking-IP arm overnight — a new entrant to watch in Layer 3.</div>
+      <div class="deps"><span class="cite">[105][106]</span></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- =================== PROTOCOL MATRIX (v3 — 4 groups) =================== -->
+<div class="layer">
+  <div class="layer-header">
+    <div><span class="layer-num">★</span><h2 style="display:inline">Protocol / Architecture Alignment Matrix (v3)</h2></div>
+    <span class="layer-meta">Four functional groups: scale-up · scale-out · communication libraries · optical strategies. Each cell shows which specific items inside the group a vendor supports.</span>
+  </div>
+
+  <!-- GROUP 1 — SCALE-UP -->
   <div class="matrix">
+    <div style="font-weight:700; color:var(--accent); font-size:13px; margin-bottom:6px;">Group 1 — Scale-up interconnect protocols (intra-rack / chip-to-chip)</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Vendor</th>
+          <th>NVLink</th>
+          <th>UALink</th>
+          <th>Google ICI</th>
+          <th>PCIe / CXL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>NVIDIA</strong></td><td class="check">✓ owner</td><td>—</td><td>—</td><td class="dot">· (host PCIe)</td></tr>
+        <tr><td><strong>AMD</strong></td><td>—</td><td class="check">✓ founder</td><td>—</td><td class="check">✓</td></tr>
+        <tr><td><strong>Intel</strong></td><td>—</td><td class="check">✓ founder</td><td>—</td><td class="check">✓</td></tr>
+        <tr><td><strong>Google</strong></td><td>—</td><td>—</td><td class="check">✓ owner (3D torus)</td><td class="dot">·</td></tr>
+        <tr><td><strong>Broadcom</strong></td><td>—</td><td class="check">✓ (SUE/UALink)</td><td>—</td><td class="check">✓</td></tr>
+        <tr><td><strong>Marvell (+ XConn)</strong></td><td>—</td><td class="check">✓</td><td>—</td><td class="check">✓ Apollo 2 hybrid</td></tr>
+        <tr><td><strong>Cisco</strong></td><td>—</td><td class="check">✓ (UALink consortium)</td><td>—</td><td class="dot">·</td></tr>
+        <tr><td><strong>Astera Labs</strong></td><td>—</td><td class="check">✓</td><td>—</td><td class="check">✓ Aries / Scorpio</td></tr>
+        <tr><td><strong>Microchip (Switchtec)</strong></td><td>—</td><td>—</td><td>—</td><td class="check">✓ PCIe Gen 6</td></tr>
+        <tr><td><strong>Upscale AI</strong></td><td>—</td><td class="check">✓ flagship (SkyHammer)</td><td>—</td><td class="dot">·</td></tr>
+        <tr><td><strong>Ayar Labs</strong></td><td>—</td><td class="check">✓ (UCIe optical chiplet)</td><td>—</td><td class="dot">·</td></tr>
+        <tr><td><strong>Celestial AI (Marvell)</strong></td><td>—</td><td class="check">✓ (scale-up fabric)</td><td>—</td><td class="dot">·</td></tr>
+        <tr><td><strong>Liqid</strong></td><td>—</td><td>—</td><td>—</td><td class="check">✓ CXL 2.0 pool</td></tr>
+        <tr><td><strong>One Stop Systems</strong></td><td>—</td><td>—</td><td>—</td><td class="check">✓ PCIe 5.0 CDI</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:11px; color:var(--muted); margin-top:6px;">Sources: <span class="cite">[22][23][29][41][43][45][48][52][76][78][85][92][96][118][123][127][128]</span></div>
+  </div>
+
+  <!-- GROUP 2 — SCALE-OUT -->
+  <div class="matrix" style="margin-top:14px;">
+    <div style="font-weight:700; color:var(--accent); font-size:13px; margin-bottom:6px;">Group 2 — Scale-out transport protocols &amp; control planes (rack-to-rack)</div>
     <table>
       <thead>
         <tr>
           <th>Vendor</th>
           <th>InfiniBand</th>
+          <th>Omni-Path</th>
           <th>RoCEv2 / UEC</th>
-          <th>Spectrum-X (NV)</th>
-          <th>Non-NV Ethernet</th>
-          <th>CPO</th>
-          <th>LPO</th>
-          <th>NVLink</th>
-          <th>UALink</th>
-          <th>NCCL / RCCL / MSCCL</th>
+          <th>Spectrum-X</th>
+          <th>AWS SRD</th>
+          <th>Google Falcon</th>
+          <th>MRC</th>
+          <th>iWARP</th>
+          <th>SONiC (NOS)</th>
+          <th>Jupiter SDN</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td><strong>NVIDIA</strong></td><td class="check">✓ Quantum</td><td class="dot">·</td><td class="check">✓ owner</td><td>—</td><td class="check">✓ (Rubin)</td><td>—</td><td class="check">✓ owner</td><td>—</td><td>NCCL</td></tr>
-        <tr><td><strong>Broadcom</strong></td><td>—</td><td class="check">✓</td><td>—</td><td class="check">✓ silicon</td><td class="check">✓ Davisson</td><td class="dot">·</td><td>—</td><td class="check">✓ SUE</td><td>NCCL-compat</td></tr>
-        <tr><td><strong>Marvell</strong></td><td>—</td><td class="check">✓</td><td>—</td><td class="check">✓ silicon</td><td class="check">✓ (Celestial)</td><td class="dot">·</td><td>—</td><td class="check">✓</td><td>NCCL/RCCL</td></tr>
-        <tr><td><strong>Cisco</strong></td><td>—</td><td class="check">✓</td><td>—</td><td class="check">✓ G300/P200</td><td class="dot">·</td><td class="check">✓ priority</td><td>—</td><td class="check">✓ UEC</td><td>NCCL-compat</td></tr>
-        <tr><td><strong>Arista</strong></td><td>—</td><td class="check">✓ Etherlink</td><td>—</td><td class="check">✓ systems</td><td class="dot">·</td><td class="dot">·</td><td>—</td><td class="check">✓ UEC</td><td>NCCL-compat</td></tr>
-        <tr><td><strong>HPE</strong></td><td>—</td><td class="check">✓ Slingshot</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td><td>—</td><td class="check">✓</td><td>NCCL/RCCL</td></tr>
-        <tr><td><strong>Credo (+ Dust)</strong></td><td>—</td><td class="check">✓</td><td>—</td><td class="check">✓</td><td class="check">✓ (post-Dust)</td><td class="dot">·</td><td>—</td><td class="check">✓</td><td>—</td></tr>
-        <tr><td><strong>Astera Labs</strong></td><td>—</td><td class="check">✓</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td><td>—</td><td class="check">✓ PCIe/CXL</td><td>—</td></tr>
-        <tr><td><strong>MaxLinear</strong></td><td class="check">✓</td><td class="check">✓</td><td>—</td><td class="check">✓</td><td>—</td><td class="check">✓ supplier</td><td>—</td><td class="dot">·</td><td>—</td></tr>
-        <tr><td><strong>Ayar Labs</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ optical I/O</td><td>—</td><td>—</td><td class="check">✓ UCIe</td><td>—</td></tr>
-        <tr><td><strong>Lightmatter</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ interposer</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td><strong>Celestial AI (Marvell)</strong></td><td>—</td><td class="check">✓</td><td>—</td><td>—</td><td class="check">✓ scale-up</td><td>—</td><td>—</td><td class="check">✓</td><td>—</td></tr>
-        <tr><td><strong>POET</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ interposer</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td><strong>Innolight / Eoptolink</strong></td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="dot">·</td><td class="check">✓ Eoptolink</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>NVIDIA</strong></td><td class="check">✓ Quantum (owner)</td><td>—</td><td class="dot">· (Spectrum-X is modified RoCEv2)</td><td class="check">✓ owner</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ Spectrum runs SONiC</td><td>—</td></tr>
+        <tr><td><strong>Broadcom</strong></td><td>—</td><td>—</td><td class="check">✓ Tomahawk/Jericho</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
+        <tr><td><strong>Marvell</strong></td><td>—</td><td>—</td><td class="check">✓ Teralynx + DSPs</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
+        <tr><td><strong>Cisco</strong></td><td>—</td><td>—</td><td class="check">✓ G300/P200</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
+        <tr><td><strong>Arista</strong></td><td>—</td><td>—</td><td class="check">✓ Etherlink (flagship)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
+        <tr><td><strong>HPE</strong></td><td>—</td><td>—</td><td class="check">✓ Slingshot</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ Aruba supports</td><td>—</td></tr>
+        <tr><td><strong>Intel (E810)</strong></td><td>—</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td><td class="check">✓ Falcon on E2100 IPU</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>AMD (Pollara / Vulcano)</strong></td><td>—</td><td>—</td><td class="check">✓ UEC-first NIC</td><td>—</td><td>—</td><td>—</td><td class="check">✓ Vulcano 800</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Cornelis Networks</strong></td><td class="dot">· (compares against)</td><td class="check">✓ owner (CN5000)</td><td class="check">✓ CN6000+ unified</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Upscale AI</strong></td><td>—</td><td>—</td><td class="check">✓ UEC/ESUN</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
+        <tr><td><strong>Microsoft Azure</strong></td><td class="check">✓ for some clusters</td><td>—</td><td class="check">✓ UEC</td><td class="dot">· (consumer)</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ owner</td><td>—</td></tr>
+        <tr><td><strong>AWS</strong></td><td>—</td><td>—</td><td class="dot">· (legacy)</td><td>—</td><td class="check">✓ owner (Nitro/EFA)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Google</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ owner (HW transport)</td><td>—</td><td>—</td><td>—</td><td class="check">✓ owner</td></tr>
+        <tr><td><strong>xAI Colossus</strong></td><td>—</td><td>—</td><td class="dot">·</td><td class="check">✓ flagship</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>OpenAI (training)</strong></td><td class="dot">·</td><td>—</td><td class="check">✓ UEC</td><td class="check">✓ (Stargate)</td><td>—</td><td>—</td><td class="check">✓ co-developed</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Meta</strong></td><td>—</td><td>—</td><td class="check">✓ flagship (Llama)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
+        <tr><td><strong>Innolight / Eoptolink</strong></td><td class="check">✓</td><td>—</td><td class="check">✓</td><td class="check">✓</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>MaxLinear</strong></td><td class="check">✓</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Semtech (+ HieFo)</strong></td><td>—</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Alphawave (Qualcomm)</strong></td><td>—</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Credo (+ Dust)</strong></td><td>—</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>CoreWeave / Lambda / Nebius</strong></td><td class="check">✓ flagship</td><td>—</td><td class="dot">·</td><td class="dot">·</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
       </tbody>
     </table>
-    <div style="font-size:11px; color:var(--muted); margin-top:6px;">
-      ✓ = explicit product / public commitment. · = supports / participates but not flagship. — = not in scope for that protocol.
-      Sources: <span class="cite">[22][26][29][33][36][39][41][43][46][48][50][52][53][56][57][76][77][78][79][80][81][82][83][84]</span>
-    </div>
+    <div style="font-size:11px; color:var(--muted); margin-top:6px;">Sources: <span class="cite">[2][4][9][10][14][15][16][17][19][20][22][23][24][27][29][33][36][39][46][56][76][77][78][89][91][94][95][96][97][98][127][129][130][131][137]</span></div>
+  </div>
+
+  <!-- GROUP 3 — COMMUNICATION LIBRARIES -->
+  <div class="matrix" style="margin-top:14px;">
+    <div style="font-weight:700; color:var(--accent); font-size:13px; margin-bottom:6px;">Group 3 — Collective communication libraries (software orchestration layer)</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Vendor</th>
+          <th>NCCL</th>
+          <th>RCCL</th>
+          <th>MSCCL / MSCCL++</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>NVIDIA</strong></td><td class="check">✓ owner</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>AMD</strong></td><td class="dot">· (NCCL-compatible API)</td><td class="check">✓ owner (ROCm)</td><td>—</td></tr>
+        <tr><td><strong>Microsoft Azure</strong></td><td class="check">✓ uses</td><td class="dot">·</td><td class="check">✓ owner</td></tr>
+        <tr><td><strong>Anthropic</strong></td><td class="check">✓ uses</td><td>—</td><td class="dot">· (when on Azure)</td></tr>
+        <tr><td><strong>OpenAI</strong></td><td class="check">✓ uses</td><td class="dot">· (AMD MI355 path)</td><td class="check">✓ (Azure clusters)</td></tr>
+        <tr><td><strong>Meta</strong></td><td class="check">✓ flagship</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>xAI</strong></td><td class="check">✓ flagship</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Google DeepMind</strong></td><td class="dot">· (XLA collectives on TPU; uses NCCL on GPU)</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Mistral / Nebius</strong></td><td class="check">✓</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:11px; color:var(--muted); margin-top:6px;">Libraries are software-only — they orchestrate collectives (all-reduce, all-gather) over whatever scale-up / scale-out fabric is underneath. Sources: <span class="cite">[82][83][84]</span></div>
+  </div>
+
+  <!-- GROUP 4 — OPTICAL STRATEGIES -->
+  <div class="matrix" style="margin-top:14px;">
+    <div style="font-weight:700; color:var(--accent); font-size:13px; margin-bottom:6px;">Group 4 — Optical connection strategies (form factor &amp; integration approach)</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Vendor</th>
+          <th>CPO</th>
+          <th>LPO</th>
+          <th>LRO</th>
+          <th>NPO</th>
+          <th>OCI / Photonic Fabric</th>
+          <th>Apollo OCS</th>
+          <th>Optical Interposer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>NVIDIA</strong></td><td class="check">✓ Quantum-X / Spectrum-X (Rubin+)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Broadcom</strong></td><td class="check">✓ flagship (TH6-Davisson)</td><td class="dot">·</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Marvell (+ Celestial + Polariton)</strong></td><td class="check">✓ + plasmonics</td><td class="dot">·</td><td>—</td><td>—</td><td class="check">✓ owner via Celestial</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Cisco</strong></td><td class="dot">· (future)</td><td class="check">✓ priority</td><td class="dot">·</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Credo (+ Dust)</strong></td><td class="check">✓</td><td class="dot">·</td><td class="check">✓ Dove 850 (industry-first 800G LRO DSP)</td><td class="check">✓ explicit roadmap</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Astera Labs (+ aiXscale)</strong></td><td class="check">✓ (fiber-chip glass coupler)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>MaxLinear</strong></td><td>—</td><td class="check">✓ analog supplier (Rushmore)</td><td class="check">✓ Optomind / OFC2024 demo</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Ayar Labs</strong></td><td class="check">✓ TeraPHY + SuperNova</td><td>—</td><td>—</td><td class="check">✓ near-port optical I/O</td><td class="dot">· (optical I/O)</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Lightmatter</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td class="dot">· (photonic compute floor)</td><td>—</td><td class="check">✓ Passage M1000</td></tr>
+        <tr><td><strong>Celestial AI (Marvell)</strong></td><td class="check">✓ scale-up</td><td>—</td><td>—</td><td>—</td><td class="check">✓ flagship (Photonic Fabric)</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>POET Technologies</strong></td><td class="check">✓ enabler</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ POET Optical Interposer</td></tr>
+        <tr><td><strong>Semtech (+ HieFo)</strong></td><td>—</td><td class="check">✓ flagship</td><td class="check">✓</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Lightwave Logic</strong></td><td class="check">✓ EO-polymer materials</td><td class="check">✓ EO-polymer materials</td><td class="dot">·</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Lucidean</strong></td><td class="check">✓ CohZero-compatible</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Neurophos</strong></td><td class="check">✓ + in-network compute</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Polaris Electro-Optics</strong></td><td class="check">✓ EO-glass materials</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Innolight / Eoptolink</strong></td><td class="dot">·</td><td class="check">✓ Eoptolink</td><td class="dot">·</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Lumentum / Coherent</strong></td><td class="check">✓ CW lasers for CPO</td><td class="dot">·</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Foxconn (FIT)</strong></td><td class="check">✓ 102.4T CPO socket / PLS cage</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>US Conec</strong></td><td class="check">✓ MMC / PRIZM TMT (CPO/NPO)</td><td>—</td><td>—</td><td class="check">✓ same physical interface</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Google</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ owner (TPU pods)</td><td>—</td></tr>
+        <tr><td><strong>Huber+Suhner (HCF)</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:11px; color:var(--muted); margin-top:6px;">Sources: <span class="cite">[11][24][26][29][30][33][41][42][46][48][49][50][52][53][55][56][57][60][61][102][103][104][107][108][110][112][114][115][125][132][133][134][135][136]</span></div>
+  </div>
+
+  <div style="font-size:11px; color:var(--muted); margin-top:10px;">
+    <strong>Reading the matrix:</strong> ✓ owner = vendor created / owns the standard. ✓ flagship = primary product line aligned to that standard. ✓ = ships a product or has explicit public commitment. · = supports / participates but not the primary bet. — = not in scope.
+    <br><br><strong>Spectrum-X note [137]:</strong> Spectrum-X is NVIDIA's <em>Ethernet hardware platform</em>, not a wire-level protocol. Its on-the-wire format is a heavily modified RoCEv2 with NVIDIA-proprietary adaptive routing &amp; telemetry — that is why both columns light up for NVIDIA / xAI / OpenAI.
   </div>
 </div>
 
@@ -879,6 +1296,20 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
       <div class="deps"><span class="cite">[9][10][11][12][13][60][66][71]</span></div>
     </div>
 
+    <div class="card neutral">
+      <div class="name">Path D — Open-stack alt-fabric (UALink / UEC / MRC)</div>
+      <div class="role">
+        <strong>L1:</strong> any frontier lab seeking to escape NVLink lock-in (OpenAI on AMD MI355 is the validated reference) <span class="arrow">→</span>
+        <strong>L2:</strong> hyperscaler / neocloud running Ultra Ethernet rack with composable infrastructure <span class="arrow">→</span>
+        <strong>L3 scale-up fabric:</strong> Upscale AI SkyHammer (UALink) / Astera Scorpio / Microchip Switchtec / Marvell-XConn Apollo 2 <span class="arrow">→</span>
+        <strong>L3 NIC:</strong> AMD Pensando Pollara 400 → Vulcano 800 (MRC) <span class="arrow">→</span>
+        <strong>L3 fabric:</strong> Broadcom Tomahawk 6 / Cisco G300 / Arista Etherlink <span class="arrow">→</span>
+        <strong>L4:</strong> Semtech LPO modules + Lumentum CW lasers <span class="arrow">→</span>
+        <strong>L5:</strong> US Conec MMC + FIT CPO sockets + Lattice control FPGAs + Liqid/OSS CDI chassis.
+      </div>
+      <div class="deps"><span class="cite">[4][26][33][36][43][45][85][92][96][97][100][112][114][116][118][119][123]</span></div>
+    </div>
+
   </div>
 </div>
 
@@ -886,9 +1317,191 @@ Citation numbers in <span class="cite">[#]</span> map to <code>AI_Networking_Mar
 <div class="footnote">
 <strong>Notes on construction.</strong> Layer 3 is the most informationally dense layer and the layer with the most contested classifications. The <em>builder</em>/<em>wrapper</em>/<em>hybrid</em> split is binary by design: a company is a builder if it owns the underlying silicon IP (switch ASIC, DSP, SerDes, SiPho PIC, or laser) it ships; a wrapper if it packages someone else's silicon into a system; hybrid if it does both (Cisco and HPE both qualify because their flagship lines use proprietary ASICs but legacy / non-flagship lines OEM Broadcom). Edge cases: <em>NVIDIA</em> is unambiguously a builder, but its transceiver (LinkX) bodies are built by ODM partners against NVIDIA-designed silicon. <em>Marvell</em> has recently moved from primarily a SerDes/DSP builder to a near-full-stack player after Celestial AI. <em>Broadcom</em> is the only pure builder spanning switch ASIC + DSP + SerDes + SiPho + VCSEL laser + custom-ASIC business.<br><br>
 On <strong>in-house networking</strong> at hyperscalers (Layer 2): the strict definition used here is <em>owns at least one of (switch ASIC, switch OS, fabric protocol, optical-circuit-switch design, NIC ASIC)</em>. By that bar: <strong>Google</strong> (OCS + Jupiter SDN), <strong>AWS</strong> (EFA NIC + SRD), <strong>Microsoft</strong> (SONiC) all qualify. Meta is debatable — it designs OCP hardware and an RDMA transport stack but uses merchant ASICs. Oracle does not qualify. Neoclouds are all merchant-fabric resellers.<br><br>
-<strong>Verification.</strong> Every supplier-component claim in the map was cross-checked against at least one primary source (company press release, 10-Q, official documentation) and at least one secondary source (trade press) where available. Sources are listed in <code>AI_Networking_Market_Map_References.md</code>.<br><br>
-Last verified: <strong>2026-05-14</strong>.
+<strong>Verification.</strong> Every supplier-component claim in the map was cross-checked against at least one primary source (company press release, 10-Q, official documentation) and at least one secondary source (trade press) where available.<br><br>
+Last verified: <strong>2026-05-17</strong>.<br><br>
 </div>
+
+
+<!-- =================== REFERENCES =================== -->
+<div class="refs-section" id="references">
+  <h2>References</h2>
+  <div class="refs-sub">137 sources. Click any <span class="cite">[#]</span> citation above to jump here. Last verified May 17, 2026.</div>
+  <div class="refs-grid">
+  <div class="refitem" id="ref-1"><span class="refnum">[1]</span> xAI, "Colossus: The World's Largest AI Supercomputer." — Confirms 100K → 200K NVIDIA Hopper GPUs on Spectrum-X Ethernet <a href="https://x.ai/colossus" target="_blank" rel="noopener">https://x.ai/colossus</a></div>
+  <div class="refitem" id="ref-2"><span class="refnum">[2]</span> NVIDIA Newsroom, "NVIDIA Ethernet Networking Accelerates World's Largest AI Supercomputer, Built by xAI." — Spectrum-X 95% throughput vs 60% standard Ethernet <a href="https://nvidianews.nvidia.com/news/spectrum-x-ethernet-networking-xai-colossus" target="_blank" rel="noopener">https://nvidianews.nvidia.com/news/spectrum-x-ethernet-networking-xai-colossus</a></div>
+  <div class="refitem" id="ref-3"><span class="refnum">[3]</span> xAI, "New Compute Partnership with Anthropic" (2026). — Anthropic renting Colossus 1 capacity, Spectrum-X exposure <a href="https://x.ai/news/anthropic-compute-partnership" target="_blank" rel="noopener">https://x.ai/news/anthropic-compute-partnership</a></div>
+  <div class="refitem" id="ref-4"><span class="refnum">[4]</span> OpenAI, "MRC: Multipath Reliable Connection — Supercomputer Networking." — OpenAI custom transport stack signal <a href="https://openai.com/index/mrc-supercomputer-networking/" target="_blank" rel="noopener">https://openai.com/index/mrc-supercomputer-networking/</a></div>
+  <div class="refitem" id="ref-5"><span class="refnum">[5]</span> Meta Engineering, "Meta open-sources transport stack to scale AI training to over 100K GPUs." — Meta's RDMA-over-Ethernet stack on Arista <a href="https://www.sdxcentral.com/news/meta-open-sources-transport-stack-to-scale-ai-training-to-over-100k-gpus/" target="_blank" rel="noopener">https://www.sdxcentral.com/news/meta-open-sources-transport-stack-to-scale-ai-training-to-over-100k-gpus/</a></div>
+  <div class="refitem" id="ref-6"><span class="refnum">[6]</span> Arista Networks Blog, "Meta and Arista Build AI at Scale." — Meta's 24K H100 cluster using 7800 + Minipack2 + Wedge400 RoCE fabric <a href="https://blogs.arista.com/blog/meta-and-arista-build-ai-at-scale" target="_blank" rel="noopener">https://blogs.arista.com/blog/meta-and-arista-build-ai-at-scale</a></div>
+  <div class="refitem" id="ref-7"><span class="refnum">[7]</span> Data Center Frontier, "Closer Look: Meta's Custom ASIC for AI Computing (MTIA)." — Meta MTIA v2 inference accelerator <a href="https://www.datacenterfrontier.com/servers/article/33005340/closer-look-metas-custom-asic-for-ai-computing" target="_blank" rel="noopener">https://www.datacenterfrontier.com/servers/article/33005340/closer-look-metas-custom-asic-for-ai-computing</a></div>
+  <div class="refitem" id="ref-8"><span class="refnum">[8]</span> Data Center Dynamics, "Meta places order for its next-gen ASIC-powered AI servers, partners with Broadcom and Quanta." — Meta–Broadcom MTIA training collaboration <a href="https://www.datacenterdynamics.com/en/news/meta-places-order-for-its-next-gen-asic-powered-ai-servers-partners-with-broadcom-and-quanta-computer/" target="_blank" rel="noopener">https://www.datacenterdynamics.com/en/news/meta-places-order-for-its-next-gen-asic-powered-ai-servers-partners-with-broadcom-and-quanta-computer/</a></div>
+  <div class="refitem" id="ref-9"><span class="refnum">[9]</span> Google Cloud Blog, "The evolution of Google's Jupiter data center network." — Jupiter + MEMS OCS, 5x speed, 40% less power <a href="https://cloud.google.com/blog/topics/systems/the-evolution-of-googles-jupiter-data-center-network" target="_blank" rel="noopener">https://cloud.google.com/blog/topics/systems/the-evolution-of-googles-jupiter-data-center-network</a></div>
+  <div class="refitem" id="ref-10"><span class="refnum">[10]</span> Google Research, "Jupiter Evolving: Transforming Google's Datacenter Network via Optical Circuit Switches and Software-Defined Networking" (SIGCOMM '22) <a href="https://research.google/pubs/jupiter-evolving-transforming-googles-datacenter-network-via-optical-circuit-switches-and-software-defined-networking/" target="_blank" rel="noopener">https://research.google/pubs/jupiter-evolving-transforming-googles-datacenter-network-via-optical-circuit-switches-and-software-defined-networking/</a></div>
+  <div class="refitem" id="ref-11"><span class="refnum">[11]</span> SemiAnalysis, "Google OCS Apollo: The &gt;$3 Billion Game-Changer in Datacenter Networking." — Apollo OCS scale, custom TPU pod interconnect <a href="https://newsletter.semianalysis.com/p/google-apollo-the-3-billion-game" target="_blank" rel="noopener">https://newsletter.semianalysis.com/p/google-apollo-the-3-billion-game</a></div>
+  <div class="refitem" id="ref-12"><span class="refnum">[12]</span> Introl Blog, "Google TPU Architecture: 7 Generations Explained" — TPU v4/v5/Ironwood OCS pod topology <a href="https://introl.com/blog/google-tpu-architecture-complete-guide-7-generations" target="_blank" rel="noopener">https://introl.com/blog/google-tpu-architecture-complete-guide-7-generations</a></div>
+  <div class="refitem" id="ref-13"><span class="refnum">[13]</span> HPCwire, "Google Aims to Flip the Script on AI Inference with New Ironwood TPUs" — Ironwood 9,216 chips, 48 OCS units <a href="https://www.hpcwire.com/2025/11/10/google-aims-to-flip-the-script-on-ai-inference-with-new-ironwood-tpus/" target="_blank" rel="noopener">https://www.hpcwire.com/2025/11/10/google-aims-to-flip-the-script-on-ai-inference-with-new-ironwood-tpus/</a></div>
+  <div class="refitem" id="ref-14"><span class="refnum">[14]</span> AWS, "Elastic Fabric Adapter (EFA)." — In-house OS-bypass NIC with SRD protocol on Nitro card <a href="https://aws.amazon.com/hpc/efa/" target="_blank" rel="noopener">https://aws.amazon.com/hpc/efa/</a></div>
+  <div class="refitem" id="ref-15"><span class="refnum">[15]</span> IEEE Xplore, Shalev et al., "A Cloud-Optimized Transport Protocol for Elastic and Scalable HPC" — AWS SRD paper <a href="https://ieeexplore.ieee.org/document/9167399/" target="_blank" rel="noopener">https://ieeexplore.ieee.org/document/9167399/</a></div>
+  <div class="refitem" id="ref-16"><span class="refnum">[16]</span> Microsoft Azure Blog, "SONiC: the network innovation powerhouse behind Azure." — SONiC powers Azure + AI platforms; multi-ASIC <a href="https://azure.microsoft.com/en-us/blog/sonic-the-network-innovation-powerhouse-behind-azure/" target="_blank" rel="noopener">https://azure.microsoft.com/en-us/blog/sonic-the-network-innovation-powerhouse-behind-azure/</a></div>
+  <div class="refitem" id="ref-17"><span class="refnum">[17]</span> NVIDIA Technical Blog, "Choosing NVIDIA Spectrum for Microsoft Azure SONiC." — Azure runs SONiC on NVIDIA Spectrum silicon <a href="https://developer.nvidia.com/blog/choosing-spectrum-for-microsoft-azure-sonic/" target="_blank" rel="noopener">https://developer.nvidia.com/blog/choosing-spectrum-for-microsoft-azure-sonic/</a></div>
+  <div class="refitem" id="ref-18"><span class="refnum">[18]</span> HUBER+SUHNER, "Strengthening collaboration with Microsoft for HCF" (Apr 2026). — Hollow-core fiber deployment in Azure backbone <a href="https://www.hubersuhner.com/en/newsroom/company-news/news-ad-hoc-news/hubersuhner-strengthens-collaboration-with-microsoft-to-advance-global-deployment-of-hollow-core-fi" target="_blank" rel="noopener">https://www.hubersuhner.com/en/newsroom/company-news/news-ad-hoc-news/hubersuhner-strengthens-collaboration-with-microsoft-to-advance-global-deployment-of-hollow-core-fi</a></div>
+  <div class="refitem" id="ref-19"><span class="refnum">[19]</span> Network World, "Neoclouds roll in, challenge hyperscalers for AI workloads." — CoreWeave / Lambda / Nebius / Crusoe positioning <a href="https://www.networkworld.com/article/4011187/neoclouds-roll-in-challenge-hyperscalers-for-ai-workloads.html" target="_blank" rel="noopener">https://www.networkworld.com/article/4011187/neoclouds-roll-in-challenge-hyperscalers-for-ai-workloads.html</a></div>
+  <div class="refitem" id="ref-20"><span class="refnum">[20]</span> SemiAnalysis, "ClusterMAX™ 2.0: The Industry Standard GPU Cloud Rating System." — Neocloud NIC/fabric tracking (InfiniBand vs Spectrum-X) <a href="https://newsletter.semianalysis.com/p/clustermax-20-the-industry-standard" target="_blank" rel="noopener">https://newsletter.semianalysis.com/p/clustermax-20-the-industry-standard</a></div>
+  <div class="refitem" id="ref-21"><span class="refnum">[21]</span> DigitalOcean, "7 CoreWeave Alternatives for Cloud GPU Computing in 2025." — Voltage Park scale (24K H100s), neocloud fabric strategies <a href="https://www.digitalocean.com/resources/articles/coreweave-alternatives" target="_blank" rel="noopener">https://www.digitalocean.com/resources/articles/coreweave-alternatives</a></div>
+  <div class="refitem" id="ref-22"><span class="refnum">[22]</span> NVIDIA Newsroom, "NVIDIA Announces New Switches Optimized for Trillion-Parameter GPU Computing and AI Infrastructure." — Spectrum-X800, Quantum-X800, BlueField-3, LinkX <a href="https://nvidianews.nvidia.com/news/networking-switches-gpu-computing-ai" target="_blank" rel="noopener">https://nvidianews.nvidia.com/news/networking-switches-gpu-computing-ai</a></div>
+  <div class="refitem" id="ref-23"><span class="refnum">[23]</span> NVIDIA Docs, "NVIDIA Quantum, Spectrum, and LinkX Product Lines." — Product catalog including Spectrum-4 SN5600, Quantum-2/3, ConnectX-8, LinkX optics <a href="https://docs.nvidia.com/networking/display/400g100gpam4ovpub/nvidia-quantum,-spectrum,-and-linkx-product-lines" target="_blank" rel="noopener">https://docs.nvidia.com/networking/display/400g100gpam4ovpub/nvidia-quantum,-spectrum,-and-linkx-product-lines</a></div>
+  <div class="refitem" id="ref-24"><span class="refnum">[24]</span> The Next Platform, "Nvidia Weaves Silicon Photonics Into InfiniBand And Ethernet" (Mar 2025). — CPO integration into Quantum-X and Spectrum-X <a href="https://www.nextplatform.com/2025/03/18/nvidia-weaves-silicon-photonics-into-infiniband-and-ethernet/" target="_blank" rel="noopener">https://www.nextplatform.com/2025/03/18/nvidia-weaves-silicon-photonics-into-infiniband-and-ethernet/</a></div>
+  <div class="refitem" id="ref-25"><span class="refnum">[25]</span> Network World, "Nvidia networking roadmap: Ethernet, InfiniBand, co-packaged optics will shape data center of the future." — Quantum 3450-LD (late 2025), SN6810/SN6800 (2026), Vera Rubin CPO roadmap <a href="https://www.networkworld.com/article/4050881/nvidia-networking-roadmap-ethernet-infiniband-co-packaged-optics-will-shape-data-center-of-the-future.html" target="_blank" rel="noopener">https://www.networkworld.com/article/4050881/nvidia-networking-roadmap-ethernet-infiniband-co-packaged-optics-will-shape-data-center-of-the-future.html</a></div>
+  <div class="refitem" id="ref-26"><span class="refnum">[26]</span> Broadcom Investors, "Broadcom Announces Tomahawk® 6 – Davisson, the Industry's First 102.4-Tbps Ethernet Switch with Co-Packaged Optics." — 3rd-gen CPO, 70% optical interconnect power reduction <a href="https://investors.broadcom.com/news-releases/news-release-details/broadcom-announces-tomahawkr-6-davisson-industrys-first-1024" target="_blank" rel="noopener">https://investors.broadcom.com/news-releases/news-release-details/broadcom-announces-tomahawkr-6-davisson-industrys-first-1024</a></div>
+  <div class="refitem" id="ref-27"><span class="refnum">[27]</span> Broadcom Blog, "Broadcom Advances Industry Support for Ethernet for AI Networking at the 2025 OCP Global Summit." — Tomahawk 6, Tomahawk Ultra, Jericho4, Thor Ultra 800G NIC <a href="https://www.broadcom.com/blog/2025-ocp-global-summit-broadcom-advances-industry-support-for-ethernet-for-ai-networking" target="_blank" rel="noopener">https://www.broadcom.com/blog/2025-ocp-global-summit-broadcom-advances-industry-support-for-ethernet-for-ai-networking</a></div>
+  <div class="refitem" id="ref-28"><span class="refnum">[28]</span> NADDOD Blog, "Broadcom's Tomahawk 6 Delivers 102.4 Tb/sec Ethernet for AI-Scale Fabrics" — Chiplet architecture, 200G SerDes specifics <a href="https://www.naddod.com/blog/broadcom-tomahawk-6-102-4-t-ethernet-switch-chip-for-ai-fabrics" target="_blank" rel="noopener">https://www.naddod.com/blog/broadcom-tomahawk-6-102-4-t-ethernet-switch-chip-for-ai-fabrics</a></div>
+  <div class="refitem" id="ref-29"><span class="refnum">[29]</span> Marvell Investor Relations, "Marvell to Acquire Celestial AI, Accelerating Scale-up Connectivity for Next-Generation Data Centers" (Dec 2025). — $3.25B deal, scale-up optical I/O <a href="https://investor.marvell.com/news-events/press-releases/detail/1000/marvell-to-acquire-celestial-ai-accelerating-scale-up-connectivity-for-next-generation-data-centers" target="_blank" rel="noopener">https://investor.marvell.com/news-events/press-releases/detail/1000/marvell-to-acquire-celestial-ai-accelerating-scale-up-connectivity-for-next-generation-data-centers</a></div>
+  <div class="refitem" id="ref-30"><span class="refnum">[30]</span> The Next Platform, "With Celestial AI Buy, Marvell Scales Up The Datacenter And Itself." — Celestial AI 16 Tbps Photonic Fabric chiplet integration <a href="https://www.nextplatform.com/2025/12/04/with-celestial-ai-buy-marvell-scales-up-the-datacenter-and-itself/" target="_blank" rel="noopener">https://www.nextplatform.com/2025/12/04/with-celestial-ai-buy-marvell-scales-up-the-datacenter-and-itself/</a></div>
+  <div class="refitem" id="ref-31"><span class="refnum">[31]</span> Marvell, "Marvell Extends Connectivity Leadership with AEC Ecosystem Demonstrations at OFC 2025." — Alaska A 1.6T AEC DSP, partners Amphenol/TE/Molex <a href="https://www.marvell.com/company/newsroom/marvell-extends-connectivity-leadership-with-aec-ecosystem-demonstrations-at-ofc-2025.html" target="_blank" rel="noopener">https://www.marvell.com/company/newsroom/marvell-extends-connectivity-leadership-with-aec-ecosystem-demonstrations-at-ofc-2025.html</a></div>
+  <div class="refitem" id="ref-32"><span class="refnum">[32]</span> Marvell, "Marvell Optical DSPs | Powering the Future of AI Infrastructure." — Inphi-derived optical DSP roadmap <a href="https://www.marvell.com/solutions/data-center/optical-dsp.html" target="_blank" rel="noopener">https://www.marvell.com/solutions/data-center/optical-dsp.html</a></div>
+  <div class="refitem" id="ref-33"><span class="refnum">[33]</span> Cisco Newsroom, "Cisco Announces New Silicon One G300, Advanced Systems and Optics to Power and Scale AI Data Centers for the Agentic Era" (Feb 2026). — 102.4 Tbps G300 ASIC, LPO-aligned optics <a href="https://newsroom.cisco.com/c/r/newsroom/en/us/a/y2026/m02/cisco-announces-new-silicon-one-g300.html" target="_blank" rel="noopener">https://newsroom.cisco.com/c/r/newsroom/en/us/a/y2026/m02/cisco-announces-new-silicon-one-g300.html</a></div>
+  <div class="refitem" id="ref-34"><span class="refnum">[34]</span> Cisco Data Sheet, "Cisco Silicon One G300." — 64x 1600 GbE, 512x 200G SerDes, scale-up/scale-out roles <a href="https://www.cisco.com/c/en/us/solutions/collateral/silicon-one/silicon-one-g300-ds.html" target="_blank" rel="noopener">https://www.cisco.com/c/en/us/solutions/collateral/silicon-one/silicon-one-g300-ds.html</a></div>
+  <div class="refitem" id="ref-35"><span class="refnum">[35]</span> The Register, "Cisco unveils 102.4T Silicon One G300 switch chip." — Independent confirmation of specs and AI positioning <a href="https://www.theregister.com/2026/02/10/cisco_challenges_broadcom_nvidia_switch_chips/" target="_blank" rel="noopener">https://www.theregister.com/2026/02/10/cisco_challenges_broadcom_nvidia_switch_chips/</a></div>
+  <div class="refitem" id="ref-36"><span class="refnum">[36]</span> Arista Networks Press Release, "Arista Unveils Etherlink AI Networking Platforms." — 7060X6 (Tomahawk 5), 7800R4 (Jericho3-AI), 7700R4 DES <a href="https://www.arista.com/en/company/news/press-release/19493-arista-unveils-etherlink-ai-networking-platforms" target="_blank" rel="noopener">https://www.arista.com/en/company/news/press-release/19493-arista-unveils-etherlink-ai-networking-platforms</a></div>
+  <div class="refitem" id="ref-37"><span class="refnum">[37]</span> Arista 7700R4 Data Sheet — Distributed Etherlink Switch specifications <a href="https://www.arista.com/assets/data/pdf/Datasheets/7700R4-Distributed-Etherlink-Switch-Datasheet.pdf" target="_blank" rel="noopener">https://www.arista.com/assets/data/pdf/Datasheets/7700R4-Distributed-Etherlink-Switch-Datasheet.pdf</a></div>
+  <div class="refitem" id="ref-38"><span class="refnum">[38]</span> Arista Press Release, "Arista Networks Unveils Next Generation Data and AI Centers" (Oct 2025). — Latest AI portfolio expansion <a href="https://www.arista.com/en/company/news/press-release/22541-pr-10292025" target="_blank" rel="noopener">https://www.arista.com/en/company/news/press-release/22541-pr-10292025</a></div>
+  <div class="refitem" id="ref-39"><span class="refnum">[39]</span> The Next Platform, "HPE Upgrades Supercomputer Lineup Top To Bottom In 2025." — Slingshot 400 with Rosetta-2 switch + Cassini-2 NIC, in-house silicon <a href="https://www.nextplatform.com/2024/11/26/hpe-upgrades-supercomputer-lineup-top-to-bottom-in-2025/" target="_blank" rel="noopener">https://www.nextplatform.com/2024/11/26/hpe-upgrades-supercomputer-lineup-top-to-bottom-in-2025/</a></div>
+  <div class="refitem" id="ref-40"><span class="refnum">[40]</span> The Next Platform, "How Will Juniper Change HPE's Datacenter Networking Strategy?" — Aruba uses mix of own ASICs and Broadcom; AMD DPU partnership <a href="https://www.nextplatform.com/2025/07/02/how-will-juniper-change-hpes-datacenter-networking-strategy/" target="_blank" rel="noopener">https://www.nextplatform.com/2025/07/02/how-will-juniper-change-hpes-datacenter-networking-strategy/</a></div>
+  <div class="refitem" id="ref-41"><span class="refnum">[41]</span> Credo Investor Relations, "Credo Agrees to Acquire DustPhotonics" (Apr 2026). — $750M cash + ~0.92M shares; vertically integrated SerDes/DSP/SiPho <a href="https://investors.credosemi.com/news-events/news/news-details/2026/Credo-Agrees-to-Acquire-DustPhotonics-Accelerating-Expansion-into-Silicon-Photonics-and-Next-Generation-Optical-Connectivity/default.aspx" target="_blank" rel="noopener">https://investors.credosemi.com/news-events/news/news-details/2026/Credo-Agrees-to-Acquire-DustPhotonics-Accelerating-Expansion-into-Silicon-Photonics-and-Next-Generation-Optical-Connectivity/default.aspx</a></div>
+  <div class="refitem" id="ref-42"><span class="refnum">[42]</span> BusinessWire/Credo, full release with $500M FY2027 optical revenue target <a href="https://www.businesswire.com/news/home/20260413933103/en/Credo-Agrees-to-Acquire-DustPhotonics" target="_blank" rel="noopener">https://www.businesswire.com/news/home/20260413933103/en/Credo-Agrees-to-Acquire-DustPhotonics</a></div>
+  <div class="refitem" id="ref-43"><span class="refnum">[43]</span> Astera Labs Product Page, "Aries PCIe/CXL Smart DSP Retimers." — Aries 6 PCIe Gen 6 retimers, AECs <a href="https://www.asteralabs.com/products/pcie-cxl-smart-dsp-retimers/" target="_blank" rel="noopener">https://www.asteralabs.com/products/pcie-cxl-smart-dsp-retimers/</a></div>
+  <div class="refitem" id="ref-44"><span class="refnum">[44]</span> Astera Labs Products Overview — Aries (retimers), Taurus (Ethernet smart cable), Leo (CXL memory), Scorpio (fabric switch), COSMOS (software) <a href="https://www.asteralabs.com/products/" target="_blank" rel="noopener">https://www.asteralabs.com/products/</a></div>
+  <div class="refitem" id="ref-45"><span class="refnum">[45]</span> Astera Labs Press Release, "Astera Labs Ramps Production of PCIe 6 Connectivity Portfolio." — Scorpio P-Series PCIe 6 fabric switches <a href="https://ir.asteralabs.com/news-releases/news-release-details/astera-labs-ramps-production-pcie-6-connectivity-portfolio" target="_blank" rel="noopener">https://ir.asteralabs.com/news-releases/news-release-details/astera-labs-ramps-production-pcie-6-connectivity-portfolio</a></div>
+  <div class="refitem" id="ref-46"><span class="refnum">[46]</span> MaxLinear Investors, "MaxLinear Unveils Rushmore: Low-Power 1.6T PAM4 DSP for AI/ML and Data Center Networks." — 200G/lane, &lt;25W optical module support, Ethernet + InfiniBand compatible <a href="https://investors.maxlinear.com/press-releases/detail/569/maxlinear-unveils-rushmore-low-power-1-6t-pam4-dsp-for" target="_blank" rel="noopener">https://investors.maxlinear.com/press-releases/detail/569/maxlinear-unveils-rushmore-low-power-1-6t-pam4-dsp-for</a></div>
+  <div class="refitem" id="ref-47"><span class="refnum">[47]</span> MaxLinear Investors, "MaxLinear Unveils Annapurna 224G Scale-Up Retimer to Extend Copper Connectivity in AI Data Centers." — 224G PAM4 retimer for AECs / backplanes; Q2 2026 availability <a href="https://investors.maxlinear.com/press-releases/detail/603/maxlinear-unveils-annapurna-224g-scale-up-retimer-to-extend" target="_blank" rel="noopener">https://investors.maxlinear.com/press-releases/detail/603/maxlinear-unveils-annapurna-224g-scale-up-retimer-to-extend</a></div>
+  <div class="refitem" id="ref-48"><span class="refnum">[48]</span> Ayar Labs, "Ayar Labs Unveils World's First UCIe Optical Chiplet for AI Scale-Up Architectures" (Mar 2025). — TeraPHY 8 Tbps + SuperNova 16-wavelength laser <a href="https://ayarlabs.com/news/ayar-labs-unveils-worlds-first-ucie-optical-chiplet-for-ai-scale-up-architectures/" target="_blank" rel="noopener">https://ayarlabs.com/news/ayar-labs-unveils-worlds-first-ucie-optical-chiplet-for-ai-scale-up-architectures/</a></div>
+  <div class="refitem" id="ref-49"><span class="refnum">[49]</span> Semiwiki, "Alchip and Ayar Labs' Co-Packaged Optics Breakthrough at TSMC OIP 2025." — 100+ Tbps per accelerator scale-up demo <a href="https://semiwiki.com/semiconductor-services/362133-revolutionizing-ai-infrastructure-alchip-and-ayar-labs-co-packaged-optics-breakthrough-at-tsmc-oip-2025/" target="_blank" rel="noopener">https://semiwiki.com/semiconductor-services/362133-revolutionizing-ai-infrastructure-alchip-and-ayar-labs-co-packaged-optics-breakthrough-at-tsmc-oip-2025/</a></div>
+  <div class="refitem" id="ref-50"><span class="refnum">[50]</span> Lightmatter, "Lightmatter Unveils Passage M1000 Photonic Superchip, World's Fastest AI Interconnect." — 114 Tbps optical, 4,000 mm² interposer, 256 fibers <a href="https://lightmatter.co/press-release/lightmatter-unveils-passage-m1000-photonic-superchip-worlds-fastest-ai-interconnect/" target="_blank" rel="noopener">https://lightmatter.co/press-release/lightmatter-unveils-passage-m1000-photonic-superchip-worlds-fastest-ai-interconnect/</a></div>
+  <div class="refitem" id="ref-51"><span class="refnum">[51]</span> ServeTheHome, "Lightmatter Passage M1000 at Hot Chips 2025." — Architecture detail; runs on GF Fotonix SiPho process <a href="https://www.servethehome.com/lightmatter-passage-m1000-at-hot-chips-2025/" target="_blank" rel="noopener">https://www.servethehome.com/lightmatter-passage-m1000-at-hot-chips-2025/</a></div>
+  <div class="refitem" id="ref-52"><span class="refnum">[52]</span> Photonics Spectra, "Marvell to Acquire Celestial AI for $3.25B." — Photonic Fabric chiplet, scale-up optical I/O <a href="https://www.photonics.com/Articles/Marvell-to-Acquire-Celestial-AI-for-325B/a71734" target="_blank" rel="noopener">https://www.photonics.com/Articles/Marvell-to-Acquire-Celestial-AI-for-325B/a71734</a></div>
+  <div class="refitem" id="ref-53"><span class="refnum">[53]</span> POET Technologies, "POET Technologies Redefines Optical Integration with Its Hybrid-Integrated 1.6T 2xFR4 Transmitter PIC." — POET Optical Interposer scalable to 3.2T <a href="https://www.poet-technologies.com/blog/poet-technologies-redefines-optical-integration-with-its-hybrid-integrated-1-6t-2xfr4-transmitter-pic" target="_blank" rel="noopener">https://www.poet-technologies.com/blog/poet-technologies-redefines-optical-integration-with-its-hybrid-integrated-1-6t-2xfr4-transmitter-pic</a></div>
+  <div class="refitem" id="ref-54"><span class="refnum">[54]</span> POET Technologies, "POET Technologies Receives $5 Million Production Order for 800G Optical Engines." <a href="https://www.poet-technologies.com/news/poet-technologies-receives-5-million-production-order-for-800g-optical-engines" target="_blank" rel="noopener">https://www.poet-technologies.com/news/poet-technologies-receives-5-million-production-order-for-800g-optical-engines</a></div>
+  <div class="refitem" id="ref-55"><span class="refnum">[55]</span> POET Technologies / Quantum Computing Inc., "Co-Develop 3.2 Tbps Optical Engines for CPO." — TFLN modulator + POET interposer collaboration <a href="https://www.poet-technologies.com/news/poet-technologies-and-quantum-computing-inc-to-co-develop-3-2-tbps-optical-engines-for-cpo-and-next-gen-ai-connectivity" target="_blank" rel="noopener">https://www.poet-technologies.com/news/poet-technologies-and-quantum-computing-inc-to-co-develop-3-2-tbps-optical-engines-for-cpo-and-next-gen-ai-connectivity</a></div>
+  <div class="refitem" id="ref-56"><span class="refnum">[56]</span> IP-Fiber, "Nvidia Orders Surge: InnoLight and Eoptolink Dominate 60% of 800G SFP Optical Modules Supply." — NVIDIA supplier-share split <a href="https://ip-fiber.com/blogs/news/nvidia-orders-surge-innolight-and-eoptolink-dominate-60-of-800g-sfp-optical-modules-supply" target="_blank" rel="noopener">https://ip-fiber.com/blogs/news/nvidia-orders-surge-innolight-and-eoptolink-dominate-60-of-800g-sfp-optical-modules-supply</a></div>
+  <div class="refitem" id="ref-57"><span class="refnum">[57]</span> Eoptolink, "Eoptolink Unveils Industry-First 800G Optical Transceiver for Multicore Fiber at OFC 2025/2026." — 1.6T OSFP-XD product line <a href="https://www.eoptolink.com/news/358-eoptolink-unveils-industry-first-800g-optical-transceiver-for-multicore-fiber-at-ofc-2026" target="_blank" rel="noopener">https://www.eoptolink.com/news/358-eoptolink-unveils-industry-first-800g-optical-transceiver-for-multicore-fiber-at-ofc-2026</a></div>
+  <div class="refitem" id="ref-58"><span class="refnum">[58]</span> SemiAnalysis, "Nvidia's Optical Ascent: &gt;$1B Revenue; The Missing 800G Ramp." — NVIDIA optical revenue and Innolight/Eoptolink role <a href="https://newsletter.semianalysis.com/p/nvidias-optical-ascent-1b-revenue" target="_blank" rel="noopener">https://newsletter.semianalysis.com/p/nvidias-optical-ascent-1b-revenue</a></div>
+  <div class="refitem" id="ref-59"><span class="refnum">[59]</span> HUBER+SUHNER + Microsoft Azure — Hollow-core fiber rollout (2026) <a href="https://opticalconnectionsnews.com/2026/04/hubersuhner-and-microsoft-azure-to-announce-new-investment-to-advance-hollow-core-fibre/" target="_blank" rel="noopener">https://opticalconnectionsnews.com/2026/04/hubersuhner-and-microsoft-azure-to-announce-new-investment-to-advance-hollow-core-fibre/</a></div>
+  <div class="refitem" id="ref-60"><span class="refnum">[60]</span> TrendForce, "AI Data Centers Ignite a Laser Shortage Wave; Nvidia's Strategic Lock-In Reshapes the Global Laser Supply Chain." — 200G EML constraint, multi-supplier capacity <a href="https://www.trendforce.com/presscenter/news/20251208-12823.html" target="_blank" rel="noopener">https://www.trendforce.com/presscenter/news/20251208-12823.html</a></div>
+  <div class="refitem" id="ref-61"><span class="refnum">[61]</span> Chipstrat (Austin Lyons), "Lumentum and the Laser Bottleneck." — Lumentum 50–60% EML share; only volume supplier of 200G/lane EML <a href="https://www.chipstrat.com/p/lumentum-and-the-laser-bottleneck" target="_blank" rel="noopener">https://www.chipstrat.com/p/lumentum-and-the-laser-bottleneck</a></div>
+  <div class="refitem" id="ref-62"><span class="refnum">[62]</span> FinancialContent, "The Light Engine of AI: A Deep Dive into Lumentum Holdings (LITE) and the 1.6T Revolution." — Lumentum $663M capacity expansion <a href="https://markets.financialcontent.com/stocks/article/finterra-2026-3-26-the-light-engine-of-ai-a-deep-dive-into-lumentum-holdings-lite-and-the-16t-revolution" target="_blank" rel="noopener">https://markets.financialcontent.com/stocks/article/finterra-2026-3-26-the-light-engine-of-ai-a-deep-dive-into-lumentum-holdings-lite-and-the-16t-revolution</a></div>
+  <div class="refitem" id="ref-63"><span class="refnum">[63]</span> Compound Semiconductor Magazine, "A tough 12 months for CS shares." — Coherent 6-inch InP wafer ramp <a href="https://compoundsemiconductor.net/article/121810/A_tough_12_months_for_CS_shares" target="_blank" rel="noopener">https://compoundsemiconductor.net/article/121810/A_tough_12_months_for_CS_shares</a></div>
+  <div class="refitem" id="ref-64"><span class="refnum">[64]</span> Sumitomo Electric, "53 GBaud Electro-Absorption Modulator Integrated Lasers." — EML technical paper and product line <a href="https://sumitomoelectric.com/sites/default/files/2023-04/download_documents/E96-05.pdf" target="_blank" rel="noopener">https://sumitomoelectric.com/sites/default/files/2023-04/download_documents/E96-05.pdf</a></div>
+  <div class="refitem" id="ref-65"><span class="refnum">[65]</span> Sumitomo Electric, "Growth strategy for data-center-related business" (Nov 2025 deck). — Vertical InP-to-EML strategy <a href="https://sumitomoelectric.com/sites/default/files/2025-11/download_documents/Growth%20strategy%20for%20data%20center-related%20business_2025.pdf" target="_blank" rel="noopener">https://sumitomoelectric.com/sites/default/files/2025-11/download_documents/Growth%20strategy%20for%20data%20center-related%20business_2025.pdf</a></div>
+  <div class="refitem" id="ref-66"><span class="refnum">[66]</span> Mordor Intelligence, "Indium Phosphide (InP) Wafer Market — Size, Share &amp; Industry Analysis." — AXT, Sumitomo, Coherent (II-VI) as InP substrate leaders <a href="https://www.mordorintelligence.com/industry-reports/indium-phosphide-wafer-market" target="_blank" rel="noopener">https://www.mordorintelligence.com/industry-reports/indium-phosphide-wafer-market</a></div>
+  <div class="refitem" id="ref-67"><span class="refnum">[67]</span> Journal of Semiconductors, "High-speed electro-absorption modulated laser." — EML technical baseline; Mitsubishi Electric, Hamamatsu cited among manufacturers <a href="https://www.jos.ac.cn/en/article/doi/10.1088/1674-4926/25030015" target="_blank" rel="noopener">https://www.jos.ac.cn/en/article/doi/10.1088/1674-4926/25030015</a></div>
+  <div class="refitem" id="ref-68"><span class="refnum">[68]</span> Molex, "Active Electrical Cable Solutions." — AEC product family for AI rack interconnect <a href="https://www.molex.com/en-us/products/connectors/high-speed-pluggable-io/active-electrical-cables-aec" target="_blank" rel="noopener">https://www.molex.com/en-us/products/connectors/high-speed-pluggable-io/active-electrical-cables-aec</a></div>
+  <div class="refitem" id="ref-69"><span class="refnum">[69]</span> Introl, "Cables and Interconnects: DAC, AOC, AEC, and Fiber for 800G AI Data Centers (2025)." — Inventory of copper-vs-optical reach and economics <a href="https://introl.com/blog/cables-interconnects-dac-aoc-aec-800g-ai-data-center-2025" target="_blank" rel="noopener">https://introl.com/blog/cables-interconnects-dac-aoc-aec-800g-ai-data-center-2025</a></div>
+  <div class="refitem" id="ref-70"><span class="refnum">[70]</span> OpenPR / IntelMarketResearch, "AI Data Center Active Electrical Cable (AEC) Modules Research." — Molex/Amphenol/TE Connectivity collectively &gt;45% AEC market share, 22% CAGR <a href="https://www.intelmarketresearch.com/aec-active-cable-for-data-centers-market-27749" target="_blank" rel="noopener">https://www.intelmarketresearch.com/aec-active-cable-for-data-centers-market-27749</a></div>
+  <div class="refitem" id="ref-71"><span class="refnum">[71]</span> TrendForce, "Silicon Photonics in the Spotlight: TSMC Lifts the Curtain on COUPE at SEMICON Taiwan" (Sep 2025). — COUPE = SoIC-X stacked optical engine on CoWoS roadmap <a href="https://www.trendforce.com/news/2025/09/09/news-silicon-photonics-in-the-spotlight-tsmc-lifts-the-curtain-on-coupe-at-semicon-taiwan/" target="_blank" rel="noopener">https://www.trendforce.com/news/2025/09/09/news-silicon-photonics-in-the-spotlight-tsmc-lifts-the-curtain-on-coupe-at-semicon-taiwan/</a></div>
+  <div class="refitem" id="ref-72"><span class="refnum">[72]</span> 3D InCites, "IFTLE 642: TSMC Advanced Co-packaged Optics Integrated CoWoS and COUPE." — Technical detail: 6nm EIC + 65nm SOI PIC <a href="https://www.3dincites.com/2025/10/iftle-642-tsmc-advanced-co-packaged-optics-integrated-cowos-and-coupe/" target="_blank" rel="noopener">https://www.3dincites.com/2025/10/iftle-642-tsmc-advanced-co-packaged-optics-integrated-cowos-and-coupe/</a></div>
+  <div class="refitem" id="ref-73"><span class="refnum">[73]</span> DigiTimes, "TSMC integrates CoWoS packaging with Coupe photonics for AI performance boost." — Broadcom Tomahawk 6 CPO uses TSMC COUPE <a href="https://www.digitimes.com/news/a20250812VL210/tsmc-cowos-performance-silicon-interposer.html" target="_blank" rel="noopener">https://www.digitimes.com/news/a20250812VL210/tsmc-cowos-performance-silicon-interposer.html</a></div>
+  <div class="refitem" id="ref-74"><span class="refnum">[74]</span> TechSoda, "IP Insight #3: TSMC Accelerates in Silicon Photonics While Intel Becomes More Selective." — Intel Foundry SiPho positioning and hybrid-laser IP <a href="https://techsoda.substack.com/p/ip-insight-3-tsmc-accelerates-in" target="_blank" rel="noopener">https://techsoda.substack.com/p/ip-insight-3-tsmc-accelerates-in</a></div>
+  <div class="refitem" id="ref-75"><span class="refnum">[75]</span> Lightmatter Hot Chips 2025 paper — GlobalFoundries Fotonix silicon-photonics platform used by Lightmatter Passage <a href="https://lightmatter.co/wp-content/uploads/2025/08/57-lightmatter_hotchips_2025_final.pdf" target="_blank" rel="noopener">https://lightmatter.co/wp-content/uploads/2025/08/57-lightmatter_hotchips_2025_final.pdf</a></div>
+  <div class="refitem" id="ref-76"><span class="refnum">[76]</span> Ultra Ethernet Consortium official site — founding members AMD, Arista, Broadcom, Cisco, Eviden, HPE, Intel, Meta, Microsoft; 100+ members by 2024 <a href="https://ultraethernet.org/" target="_blank" rel="noopener">https://ultraethernet.org/</a></div>
+  <div class="refitem" id="ref-77"><span class="refnum">[77]</span> HPCwire, "Ultra Ethernet Has Arrived: One Network to Rule Them All?" — UEC 1.0 (Jun 2025), 1.0.1 update <a href="https://www.hpcwire.com/2025/09/09/ultra-ethernet-has-arrived-one-network-to-rule-them-all/" target="_blank" rel="noopener">https://www.hpcwire.com/2025/09/09/ultra-ethernet-has-arrived-one-network-to-rule-them-all/</a></div>
+  <div class="refitem" id="ref-78"><span class="refnum">[78]</span> Tom's Hardware, "AMD unveils industry's first Ultra Ethernet ready network card for AI and HPC." — Pensando Pollara 400 UEC NIC <a href="https://www.tomshardware.com/networking/amd-unveils-industrys-first-ultra-ethernet-ready-network-card-for-ai-and-hpc" target="_blank" rel="noopener">https://www.tomshardware.com/networking/amd-unveils-industrys-first-ultra-ethernet-ready-network-card-for-ai-and-hpc</a></div>
+  <div class="refitem" id="ref-79"><span class="refnum">[79]</span> SemiAnalysis, "The New AI Networks: Ultra Ethernet UEC, UALink, Broadcom SUE." — Scale-up vs scale-out framing <a href="https://newsletter.semianalysis.com/p/the-new-ai-networks-ultra-ethernet-uec-ualink-vs-broadcom-scale-up-ethernet-sue" target="_blank" rel="noopener">https://newsletter.semianalysis.com/p/the-new-ai-networks-ultra-ethernet-uec-ualink-vs-broadcom-scale-up-ethernet-sue</a></div>
+  <div class="refitem" id="ref-80"><span class="refnum">[80]</span> The Register, "Copackaged optics have officially found their killer app." — CPO momentum at Broadcom + NVIDIA <a href="https://www.theregister.com/2025/11/22/cpo_ai_nvidia_broadcom" target="_blank" rel="noopener">https://www.theregister.com/2025/11/22/cpo_ai_nvidia_broadcom</a></div>
+  <div class="refitem" id="ref-81"><span class="refnum">[81]</span> HPCwire, "Photonic Switches Promise to Keep GPUs Fed, Cool." — CPO power/latency benefits at scale <a href="https://www.hpcwire.com/2025/10/01/photonic-switches-promise-to-keep-gpus-fed-cool/" target="_blank" rel="noopener">https://www.hpcwire.com/2025/10/01/photonic-switches-promise-to-keep-gpus-fed-cool/</a></div>
+  <div class="refitem" id="ref-82"><span class="refnum">[82]</span> NVIDIA Developer, "NVIDIA Collective Communications Library (NCCL)." <a href="https://developer.nvidia.com/nccl" target="_blank" rel="noopener">https://developer.nvidia.com/nccl</a></div>
+  <div class="refitem" id="ref-83"><span class="refnum">[83]</span> ROCm/rccl on DeepWiki — RCCL drop-in NCCL-compatible AMD library <a href="https://deepwiki.com/ROCm/rccl" target="_blank" rel="noopener">https://deepwiki.com/ROCm/rccl</a></div>
+  <div class="refitem" id="ref-84"><span class="refnum">[84]</span> arXiv, "MSCCL++: Rethinking GPU Communication Abstractions for Cutting-Edge AI Applications." — MSCCL/MSCCL++ background, up to 5.4x speedup <a href="https://arxiv.org/html/2504.09014v2" target="_blank" rel="noopener">https://arxiv.org/html/2504.09014v2</a></div>
+  <div class="refitem" id="ref-85"><span class="refnum">[85]</span> HPCwire, "Upscale AI Eyes Late 2026 for Scale-Up UALink Switch." — SkyHammer ASIC, 1,024 devices/rack via UALink 1.0, ~100–150 ns latency <a href="https://www.hpcwire.com/2025/12/02/upscale-ai-eyes-late-2026-for-scale-up-ualink-switch/" target="_blank" rel="noopener">https://www.hpcwire.com/2025/12/02/upscale-ai-eyes-late-2026-for-scale-up-ualink-switch/</a></div>
+  <div class="refitem" id="ref-86"><span class="refnum">[86]</span> Upscale AI, "Upscale AI Unveils SkyHammer™ Architecture." — Multi-standard support (ESUN, UEC, UALink) <a href="https://upscaleai.com/upscale-ai-unveils-skyhammer-architecture/" target="_blank" rel="noopener">https://upscaleai.com/upscale-ai-unveils-skyhammer-architecture/</a></div>
+  <div class="refitem" id="ref-87"><span class="refnum">[87]</span> The Next Platform, "Upscale AI Nabs Cash To Forge SkyHammer Scale-Up Fabric Switch." — $200M Series A + ~$100M seed, ~$300M total, unicorn status <a href="https://www.nextplatform.com/connect/2026/01/21/upscale-ai-nabs-cash-to-forge-skyhammer-scale-up-fabric-switch/4092095" target="_blank" rel="noopener">https://www.nextplatform.com/connect/2026/01/21/upscale-ai-nabs-cash-to-forge-skyhammer-scale-up-fabric-switch/4092095</a></div>
+  <div class="refitem" id="ref-88"><span class="refnum">[88]</span> HPCwire, "Upscale AI Nabs $200M to Build a Scale-Up Interconnect That's Open." <a href="https://www.hpcwire.com/2026/01/22/upscale-ai-nabs-200m-to-build-a-scale-up-interconnect-thats-open/" target="_blank" rel="noopener">https://www.hpcwire.com/2026/01/22/upscale-ai-nabs-200m-to-build-a-scale-up-interconnect-thats-open/</a></div>
+  <div class="refitem" id="ref-89"><span class="refnum">[89]</span> Cornelis Networks, "Cornelis Launches CN5000: Industry Leading AI and HPC Scale-Out Network." — 400G Omni-Path, 19.2 Tbps in 48-port switch, 230.4 Tbps director, 6× faster than RoCE for AI collectives <a href="https://www.cornelis.com/stories/cornelis-launches-cn5000-industry-leading-ai-and-hpc-scale-out-network" target="_blank" rel="noopener">https://www.cornelis.com/stories/cornelis-launches-cn5000-industry-leading-ai-and-hpc-scale-out-network</a></div>
+  <div class="refitem" id="ref-90"><span class="refnum">[90]</span> The Register, "Omni-Path is back to take on InfiniBand?" — Spin-off context, CN5000 vs Quantum-2 NDR <a href="https://www.theregister.com/2025/06/09/omnipath_is_back/" target="_blank" rel="noopener">https://www.theregister.com/2025/06/09/omnipath_is_back/</a></div>
+  <div class="refitem" id="ref-91"><span class="refnum">[91]</span> Network World, "Cornelis Networks offers alternative to Infiniband or Ethernet for HPC and AI networks." — CN6000 800G (Omni-Path + RoCE unified), CN7000 1.6T (UEC + Omni-Path) <a href="https://www.networkworld.com/article/4001125/cornelis-networks-offers-alternative-to-infiniband-or-ethernet-for-hpc-and-ai-networks.html" target="_blank" rel="noopener">https://www.networkworld.com/article/4001125/cornelis-networks-offers-alternative-to-infiniband-or-ethernet-for-hpc-and-ai-networks.html</a></div>
+  <div class="refitem" id="ref-92"><span class="refnum">[92]</span> Microchip Technology Press Release, "Microchip Unveils First 3 nm PCIe Gen 6 Switch to Power Modern AI Infrastructure." — Switchtec Gen 6: up to 160 lanes, 64 GT/s/lane, 15% power advantage vs. 5 nm <a href="https://www.microchip.com/en-us/about/news-releases/products/microchip-unveils-first-3-nm-pcie--gen-6-switch-to-power-modern" target="_blank" rel="noopener">https://www.microchip.com/en-us/about/news-releases/products/microchip-unveils-first-3-nm-pcie--gen-6-switch-to-power-modern</a></div>
+  <div class="refitem" id="ref-93"><span class="refnum">[93]</span> Microchip Investor Relations release (mirror) <a href="https://ir.microchip.com/news-events/press-releases/detail/1338/microchip-unveils-first-3-nm-pcie-gen-6-switch-to-power-modern-ai-infrastructure" target="_blank" rel="noopener">https://ir.microchip.com/news-events/press-releases/detail/1338/microchip-unveils-first-3-nm-pcie-gen-6-switch-to-power-modern-ai-infrastructure</a></div>
+  <div class="refitem" id="ref-94"><span class="refnum">[94]</span> Intel, "Intel Ethernet Network Adapter E810-CQDA2 — Product Brief." — 100 GbE Ethernet 800 series, RoCEv2 + iWARP, 256K queue pairs <a href="https://www.intel.com/content/www/us/en/products/sku/192558/intel-ethernet-network-adapter-e810cqda2/specifications.html" target="_blank" rel="noopener">https://www.intel.com/content/www/us/en/products/sku/192558/intel-ethernet-network-adapter-e810cqda2/specifications.html</a></div>
+  <div class="refitem" id="ref-95"><span class="refnum">[95]</span> Intel Support, "Which Intel Ethernet Network Adapters Support iWARP and RoCE v2?" — Explicit protocol map for 800 series <a href="https://www.intel.com/content/www/us/en/support/articles/000031905/ethernet-products/700-series-controllers-up-to-40gbe.html" target="_blank" rel="noopener">https://www.intel.com/content/www/us/en/support/articles/000031905/ethernet-products/700-series-controllers-up-to-40gbe.html</a></div>
+  <div class="refitem" id="ref-96"><span class="refnum">[96]</span> AMD, "AMD Pensando Pollara 400 AI Network Interface Card (NIC)." — Industry-first UEC-ready 400 Gbps AI NIC, validated with AMD Instinct MI350/MI355 <a href="https://www.amd.com/en/products/network-interface-cards/pensando.html" target="_blank" rel="noopener">https://www.amd.com/en/products/network-interface-cards/pensando.html</a></div>
+  <div class="refitem" id="ref-97"><span class="refnum">[97]</span> AMD Blog, "From Innovation to Deployment Ready: AMD Advances AI Networking at Scale with MRC." — Pollara + Vulcano 800 supporting MRC transport <a href="https://www.amd.com/en/blogs/2026/amd-advances-ai-networking-at-scale-with-mrc.html" target="_blank" rel="noopener">https://www.amd.com/en/blogs/2026/amd-advances-ai-networking-at-scale-with-mrc.html</a></div>
+  <div class="refitem" id="ref-98"><span class="refnum">[98]</span> Network World, "AMD rolls out first Ultra Ethernet-compliant NIC." <a href="https://www.networkworld.com/article/4011095/amd-rolls-out-first-ultra-ethernet-compliant-nic.html" target="_blank" rel="noopener">https://www.networkworld.com/article/4011095/amd-rolls-out-first-ultra-ethernet-compliant-nic.html</a></div>
+  <div class="refitem" id="ref-99"><span class="refnum">[99]</span> TechRadar, "Pollara 400GbE AI NIC leads AMD's push into UltraEthernet networking, Vulcano 800G coming for Gen6 clusters in 2026." <a href="https://www.techradar.com/pro/amd-debuts-a-400gbe-ai-network-card-with-an-800gbe-pcie-gen6-nic-coming-in-2026-but-will-the-industry-be-ready" target="_blank" rel="noopener">https://www.techradar.com/pro/amd-debuts-a-400gbe-ai-network-card-with-an-800gbe-pcie-gen6-nic-coming-in-2026-but-will-the-industry-be-ready</a></div>
+  <div class="refitem" id="ref-100"><span class="refnum">[100]</span> Semtech, "Semtech Expands Data Center Portfolio with Acquisition of HieFo Corporation." — $34M cash, DFB-laser optoelectronics, March 2026 close <a href="https://www.semtech.com/company/press/semtech-expands-data-center-portfolio-with-acquisition-of-hiefo-corporation" target="_blank" rel="noopener">https://www.semtech.com/company/press/semtech-expands-data-center-portfolio-with-acquisition-of-hiefo-corporation</a></div>
+  <div class="refitem" id="ref-101"><span class="refnum">[101]</span> Semiconductor Today, "Semtech expands data-center portfolio by acquiring HieFo for $34m." — IMDD + LPO integration strategy <a href="https://www.semiconductor-today.com/news_items/2026/mar/semtech-hiefo-050326.shtml" target="_blank" rel="noopener">https://www.semiconductor-today.com/news_items/2026/mar/semtech-hiefo-050326.shtml</a></div>
+  <div class="refitem" id="ref-102"><span class="refnum">[102]</span> Lightwave Logic Press Release, "Lightwave Logic Demonstrates World-Class 200 Gbps Heterogeneous Polymer/Silicon Photonic Modulator Results." <a href="https://www.prnewswire.com/news-releases/lightwave-logic-demonstrates-world-class-200gbps-heterogeneous-polymersilicon-photonic-modulator-results-302097749.html" target="_blank" rel="noopener">https://www.prnewswire.com/news-releases/lightwave-logic-demonstrates-world-class-200gbps-heterogeneous-polymersilicon-photonic-modulator-results-302097749.html</a></div>
+  <div class="refitem" id="ref-103"><span class="refnum">[103]</span> Lightwave Logic + Tower Semiconductor partnership — EO polymer integration on Tower PH18 SiPho PDK <a href="https://finance.yahoo.com/news/lightwave-logic-tower-semiconductor-announce-203000189.html" target="_blank" rel="noopener">https://finance.yahoo.com/news/lightwave-logic-tower-semiconductor-announce-203000189.html</a></div>
+  <div class="refitem" id="ref-104"><span class="refnum">[104]</span> StockTitan / Lightwave Logic, "Lightwave Logic modulators added to GF silicon photonics PDK." — GlobalFoundries Fotonix integration (Mar 2026) <a href="https://www.stocktitan.net/news/LWLG/lightwave-logic-high-speed-modulator-platform-now-available-in-gds-nsl6r3dsd39v.html" target="_blank" rel="noopener">https://www.stocktitan.net/news/LWLG/lightwave-logic-high-speed-modulator-platform-now-available-in-gds-nsl6r3dsd39v.html</a></div>
+  <div class="refitem" id="ref-105"><span class="refnum">[105]</span> Alphawave Semi Press Release, "Acquisition of Optical DSP Developer Banias Labs." — $240M, 2022 deal <a href="https://awavesemi.com/press-release/acquisition-of-optical-dsp-developer-banias-labs/" target="_blank" rel="noopener">https://awavesemi.com/press-release/acquisition-of-optical-dsp-developer-banias-labs/</a></div>
+  <div class="refitem" id="ref-106"><span class="refnum">[106]</span> Qualcomm Press Release, "Qualcomm Completes Acquisition of Alphawave Semi" (Dec 2025). — $2.4B; Alphawave brings SerDes + Banias optical DSP IP into Qualcomm data-center push <a href="https://www.qualcomm.com/news/releases/2025/12/qualcomm-completes-acquisition-of-alphawave-semi" target="_blank" rel="noopener">https://www.qualcomm.com/news/releases/2025/12/qualcomm-completes-acquisition-of-alphawave-semi</a></div>
+  <div class="refitem" id="ref-107"><span class="refnum">[107]</span> BusinessWire, "Lucidean Raises Series Seed Funding to Accelerate Next-Gen Coherent Optical Links for Data Centers" — $18M seed Dec 2025; CohZero coherent-lite IP for 3.2T/6.4T transceivers, compatible with CPO <a href="https://www.businesswire.com/news/home/20251223818151/en/Lucidean-Raises-Series-Seed-Funding-to-Accelerate-Next-Gen-Coherent-Optical-Links-for-Data-Centers-Announces-Dr.-James-Raring-as-Chief-Executive-Officer" target="_blank" rel="noopener">https://www.businesswire.com/news/home/20251223818151/en/Lucidean-Raises-Series-Seed-Funding-to-Accelerate-Next-Gen-Coherent-Optical-Links-for-Data-Centers-Announces-Dr.-James-Raring-as-Chief-Executive-Officer</a></div>
+  <div class="refitem" id="ref-108"><span class="refnum">[108]</span> TechCrunch, "From invisibility cloaks to AI chips: Neurophos raises $110M to build tiny optical processors for inferencing" (Jan 2026). — Metasurface optical processor for in-network compute <a href="https://techcrunch.com/2026/01/22/from-invisibility-cloaks-to-ai-chips-neurophos-raises-110m-to-build-tiny-optical-processors-for-inferencing/" target="_blank" rel="noopener">https://techcrunch.com/2026/01/22/from-invisibility-cloaks-to-ai-chips-neurophos-raises-110m-to-build-tiny-optical-processors-for-inferencing/</a></div>
+  <div class="refitem" id="ref-109"><span class="refnum">[109]</span> EE Times, "Neurophos Photonic AI Test Chip Hits 300 TOPS/W." — Performance benchmark for the metasurface OPU <a href="https://www.eetimes.com/neurophos-photonic-ai-test-chip-hits-300-tops-w/" target="_blank" rel="noopener">https://www.eetimes.com/neurophos-photonic-ai-test-chip-hits-300-tops-w/</a></div>
+  <div class="refitem" id="ref-110"><span class="refnum">[110]</span> Polaris Electro-Optics company site. — Ferroelectric nematic glass integrated with SiPho; 400 Gbps/lane and beyond; CPO-ready drop-in <a href="https://polariseo.com/" target="_blank" rel="noopener">https://polariseo.com/</a></div>
+  <div class="refitem" id="ref-111"><span class="refnum">[111]</span> Yole / Polaris Electro-Optics, "Integrated photonics startup polaris electro-optics adds $3m in financing" (and subsequent $10M Series A 2025) <a href="https://www.yolegroup.com/industry-news/integrated-photonics-startup-polaris-electro-optics-adds-3m-in-financing/" target="_blank" rel="noopener">https://www.yolegroup.com/industry-news/integrated-photonics-startup-polaris-electro-optics-adds-3m-in-financing/</a></div>
+  <div class="refitem" id="ref-112"><span class="refnum">[112]</span> US Conec / PRNewswire (multi-source framework), "US Conec, Corning, Fujikura, and Sumitomo Electric Lightwave Announce Multi-Source Framework for PRIZM TMT Expanded Beam Ferrules and Associated MMC Connectors." — 3× density vs MPO; CPO/NPO-ready <a href="https://www.prnewswire.com/news-releases/us-conec-corning-incorporated-fujikura-and-sumitomo-electric-lightwave-announce-multi-source-framework-for-prizm-tmt-expanded-beam-ferrules-and-associated-mmc-connectors-302710483.html" target="_blank" rel="noopener">https://www.prnewswire.com/news-releases/us-conec-corning-incorporated-fujikura-and-sumitomo-electric-lightwave-announce-multi-source-framework-for-prizm-tmt-expanded-beam-ferrules-and-associated-mmc-connectors-302710483.html</a></div>
+  <div class="refitem" id="ref-113"><span class="refnum">[113]</span> US Conec, "MMC Connector Solutions." — Product overview + CPO/NPO applications <a href="https://www.usconec.com/featured-products/mmc-connector" target="_blank" rel="noopener">https://www.usconec.com/featured-products/mmc-connector</a></div>
+  <div class="refitem" id="ref-114"><span class="refnum">[114]</span> Foxconn Interconnect Technology (FIT), "FIT Advances Broadcom's Co-Packaged Optics (CPO) Initiative with High-Performance Interconnect Solutions." — Solderless LGA sockets + Remote PLS I/O cages for Broadcom CPO <a href="https://www.fit-foxconn.com/main/modules/MySpace/BlogInfo.php?xmlid=27625" target="_blank" rel="noopener">https://www.fit-foxconn.com/main/modules/MySpace/BlogInfo.php?xmlid=27625</a></div>
+  <div class="refitem" id="ref-115"><span class="refnum">[115]</span> FIT, "FIT Advances 102.4T CPO External Laser Platform into Validation." — 102.4T CPO External Laser Solution validation <a href="https://www.fit-foxconn.com/main/modules/MySpace/index.php?xmlid=28162" target="_blank" rel="noopener">https://www.fit-foxconn.com/main/modules/MySpace/index.php?xmlid=28162</a></div>
+  <div class="refitem" id="ref-116"><span class="refnum">[116]</span> StockTitan / One Stop Systems, "One Stop Systems Lands $2M AI Infrastructure Deal for Revolutionary PCIe 5.0 System." — Ponto Reef 32-accelerator PCIe 5.0 system for CDI <a href="https://www.stocktitan.net/news/OSS/oss-announces-design-win-with-an-award-winning-ai-infrastructure-0rwi8kixm1nz.html" target="_blank" rel="noopener">https://www.stocktitan.net/news/OSS/oss-announces-design-win-with-an-award-winning-ai-infrastructure-0rwi8kixm1nz.html</a></div>
+  <div class="refitem" id="ref-117"><span class="refnum">[117]</span> Introl, "Disaggregated Computing for AI" — Liqid + GigaIO CDI vendor framing; CXL pooling <a href="https://introl.com/blog/disaggregated-computing-composable-infrastructure-cxl-ai-2025" target="_blank" rel="noopener">https://introl.com/blog/disaggregated-computing-composable-infrastructure-cxl-ai-2025</a></div>
+  <div class="refitem" id="ref-118"><span class="refnum">[118]</span> Liqid Blog, "Getting the Most Out of Your GPUs — How Composable Disaggregated Infrastructure Can Help." — Liqid EX-5410P with H200 / RTX Pro 6000 / Gaudi 3 support, CXL 2.0 memory pooling up to 100 TB <a href="https://www.liqid.com/blog/getting-the-most-out-of-your-gpus-how-composable-disaggregated-infrastructure-can-help" target="_blank" rel="noopener">https://www.liqid.com/blog/getting-the-most-out-of-your-gpus-how-composable-disaggregated-infrastructure-can-help</a></div>
+  <div class="refitem" id="ref-119"><span class="refnum">[119]</span> Lattice Semiconductor + AMI acquisition / FY25 server narrative. — AI servers +85% YoY; 70–130 FPGAs per hyperscaler rack; $1.65B AMI deal <a href="https://futurumgroup.com/insights/lattice-semiconductor-q4-fy-2025-record-comms-compute-ai-servers-85/" target="_blank" rel="noopener">https://futurumgroup.com/insights/lattice-semiconductor-q4-fy-2025-record-comms-compute-ai-servers-85/</a></div>
+  <div class="refitem" id="ref-120"><span class="refnum">[120]</span> Lattice Semiconductor Press Release, "Lattice Expands Low Power, Small FPGA Portfolio with High I/O Density and Secure Device Options." — Certus-NX / MachXO5-NX; DC-SCM; PQC root-of-trust <a href="https://ir.latticesemi.com/news-releases/news-release-details/lattice-expands-low-power-small-fpga-portfolio-high-io-density" target="_blank" rel="noopener">https://ir.latticesemi.com/news-releases/news-release-details/lattice-expands-low-power-small-fpga-portfolio-high-io-density</a></div>
+  <div class="refitem" id="ref-121"><span class="refnum">[121]</span> Astera Labs, "Astera Labs to Acquire aiXscale Photonics" (Oct 22, 2025). — Glass fiber-chip coupling IP for rack-scale photonic chiplets <a href="https://www.asteralabs.com/news/astera-labs-to-acquire-aixscale-photonics/" target="_blank" rel="noopener">https://www.asteralabs.com/news/astera-labs-to-acquire-aixscale-photonics/</a></div>
+  <div class="refitem" id="ref-122"><span class="refnum">[122]</span> Astera Labs, "Astera Labs Completes Acquisition of aiXscale Photonics" (Nov 2025) <a href="https://www.asteralabs.com/astera-labs-completes-acquisition-of-aixscale-photonics/" target="_blank" rel="noopener">https://www.asteralabs.com/astera-labs-completes-acquisition-of-aixscale-photonics/</a></div>
+  <div class="refitem" id="ref-123"><span class="refnum">[123]</span> Marvell Investor Relations, "Marvell to Acquire XConn Technologies, Expanding Leadership in AI Data Center Connectivity." — $540M; XConn Apollo 2 hybrid CXL 3.1 + PCIe Gen 6.2 switch on one die <a href="https://investor.marvell.com/news-events/press-releases/detail/1004/marvell-to-acquire-xconn-technologies-expanding-leadership-in-ai-data-center-connectivity" target="_blank" rel="noopener">https://investor.marvell.com/news-events/press-releases/detail/1004/marvell-to-acquire-xconn-technologies-expanding-leadership-in-ai-data-center-connectivity</a></div>
+  <div class="refitem" id="ref-124"><span class="refnum">[124]</span> Marvell Press Release, "Marvell Completes Acquisition of XConn Technologies" (Feb 10, 2026) <a href="https://www.marvell.com/company/newsroom/marvell-completes-acquisition-of-xconn-technologies.html" target="_blank" rel="noopener">https://www.marvell.com/company/newsroom/marvell-completes-acquisition-of-xconn-technologies.html</a></div>
+  <div class="refitem" id="ref-125"><span class="refnum">[125]</span> Marvell Press Release, "Marvell Announces Acquisition of Polariton Technologies, Advancing Optical Performance Scaling to 3.2T and Beyond" (Apr 22, 2026). — Swiss plasmonics-based modulator IP for 3.2T+ coherent / DCI <a href="https://investor.marvell.com/news-events/press-releases/detail/1020/marvell-announces-acquisition-of-polariton-technologies-advancing-optical-performance-scaling-to-3-2t-and-beyond" target="_blank" rel="noopener">https://investor.marvell.com/news-events/press-releases/detail/1020/marvell-announces-acquisition-of-polariton-technologies-advancing-optical-performance-scaling-to-3-2t-and-beyond</a></div>
+  <div class="refitem" id="ref-126"><span class="refnum">[126]</span> Data Center Dynamics, "Marvell acquires silicon photonics device startup Polariton Technologies to advance optical scaling." — ETH Zurich spin-out context <a href="https://www.datacenterdynamics.com/en/news/marvell-acquires-silicon-photonics-device-startup-polariton-technologies-to-advance-optical-scaling/" target="_blank" rel="noopener">https://www.datacenterdynamics.com/en/news/marvell-acquires-silicon-photonics-device-startup-polariton-technologies-to-advance-optical-scaling/</a></div>
+  <div class="refitem" id="ref-127"><span class="refnum">[127]</span> Google Cloud Blog, "Inside the Ironwood TPU codesigned AI stack." — ICI 3D-torus topology, 6 neighbors per chip, up to 1.2 TBps bidirectional per chip; underpinning of TPU scale-up domain <a href="https://cloud.google.com/blog/products/compute/inside-the-ironwood-tpu-codesigned-ai-stack" target="_blank" rel="noopener">https://cloud.google.com/blog/products/compute/inside-the-ironwood-tpu-codesigned-ai-stack</a></div>
+  <div class="refitem" id="ref-128"><span class="refnum">[128]</span> FiberMall, "Unveiling Google's TPU Architecture: OCS Optical Circuit Switching — The Evolution Engine from 4×4×4 Cube to 9216-Chip Ironwood." — ICI + Apollo OCS combined to form TPU pods <a href="https://www.fibermall.com/blog/unveiling-google-tpu-architecture.htm" target="_blank" rel="noopener">https://www.fibermall.com/blog/unveiling-google-tpu-architecture.htm</a></div>
+  <div class="refitem" id="ref-129"><span class="refnum">[129]</span> Google Cloud Blog, "Introducing Falcon: a reliable low-latency hardware transport." — Hardware NIC transport at 200 Gbps, ~3 µs one-way, scalable to 400/800 Gbps; sits on UDP/IP; supports IB Verbs RDMA + NVMe ULPs; deployed in Intel E2100 IPU <a href="https://cloud.google.com/blog/topics/systems/introducing-falcon-a-reliable-low-latency-hardware-transport" target="_blank" rel="noopener">https://cloud.google.com/blog/topics/systems/introducing-falcon-a-reliable-low-latency-hardware-transport</a></div>
+  <div class="refitem" id="ref-130"><span class="refnum">[130]</span> ACM SIGCOMM 2025, "Falcon: A Reliable, Low Latency Hardware Transport." — Peer-reviewed protocol paper <a href="https://dl.acm.org/doi/10.1145/3718958.3754353" target="_blank" rel="noopener">https://dl.acm.org/doi/10.1145/3718958.3754353</a></div>
+  <div class="refitem" id="ref-131"><span class="refnum">[131]</span> Converge Digest, "Hot Interconnects 2025: Google Unveils Falcon, Swift, and Firefly for AI Data Centers." — Falcon + Swift (congestion control) + Firefly (clock sync) trio for AI fabrics <a href="https://convergedigest.com/at-hoti-2025-google-unveils-falcon-swift-and-firefly-for-ai-data-centers/" target="_blank" rel="noopener">https://convergedigest.com/at-hoti-2025-google-unveils-falcon-swift-and-firefly-for-ai-data-centers/</a></div>
+  <div class="refitem" id="ref-132"><span class="refnum">[132]</span> Credo Semiconductor Press Release, "Credo Introduces World's First 800G DSP for Linear Receive Optics, Targeting Hyperscale and AI Data Centers" (Nov 2023). — Dove 850 LRO DSP, up to 50% power reduction; foundational LRO product <a href="https://credosemi.com/news/credo-introduces-worlds-first-800g-dsp-for-linear-receive-optics-targeting-hyperscale-and-ai-data-centers/" target="_blank" rel="noopener">https://credosemi.com/news/credo-introduces-worlds-first-800g-dsp-for-linear-receive-optics-targeting-hyperscale-and-ai-data-centers/</a></div>
+  <div class="refitem" id="ref-133"><span class="refnum">[133]</span> Juniper Networks, "Types of Optics" (800G optics cable guide). — Authoritative definitions for LPO vs LRO (Half-Retimed Linear Optics / HALO) <a href="https://www.juniper.net/documentation/us/en/hardware/800g-optics-cables-guide/optics/topics/concept/800g-optic-types-lpolro.html" target="_blank" rel="noopener">https://www.juniper.net/documentation/us/en/hardware/800g-optics-cables-guide/optics/topics/concept/800g-optic-types-lpolro.html</a></div>
+  <div class="refitem" id="ref-134"><span class="refnum">[134]</span> MaxLinear Investor Relations, "Optomind and MaxLinear Demonstrate 800G LRO Optical Modules and AOCs at OFC2024." — Multiple-vendor LRO ecosystem confirmation <a href="https://investors.maxlinear.com/press-releases/detail/533/optomind-and-maxlinear-demonstrate-800g-lro-optical-modules" target="_blank" rel="noopener">https://investors.maxlinear.com/press-releases/detail/533/optomind-and-maxlinear-demonstrate-800g-lro-optical-modules</a></div>
+  <div class="refitem" id="ref-135"><span class="refnum">[135]</span> Credo / DustPhotonics deal release language (2026) — explicit NPO + CPO targeting on DustPhotonics PIC roadmap <a href="https://www.businesswire.com/news/home/20260413933103/en/Credo-Agrees-to-Acquire-DustPhotonics-Accelerating-Expansion-into-Silicon-Photonics-and-Next-Generation-Optical-Connectivity" target="_blank" rel="noopener">https://www.businesswire.com/news/home/20260413933103/en/Credo-Agrees-to-Acquire-DustPhotonics-Accelerating-Expansion-into-Silicon-Photonics-and-Next-Generation-Optical-Connectivity</a></div>
+  <div class="refitem" id="ref-136"><span class="refnum">[136]</span> Lightwave Online, "Credo's DustPhotonics acquisition solidifies its AI interconnect position." — NPO/CPO context for hyperscale AI optical roadmap <a href="https://www.lightwaveonline.com/home/article/55370917/credos-dustphotonics-acquisition-solidifies-its-ai-interconnect-position" target="_blank" rel="noopener">https://www.lightwaveonline.com/home/article/55370917/credos-dustphotonics-acquisition-solidifies-its-ai-interconnect-position</a></div>
+  <div class="refitem" id="ref-137"><span class="refnum">[137]</span> SDxCentral, "Inside Spectrum-X: NVIDIA's Ethernet networking platform." — Spectrum-X is the platform brand for NVIDIA's modified-RoCEv2 stack on Spectrum-4/Spectrum-6 silicon + BlueField SuperNICs. Not a separate transport protocol <a href="https://www.sdxcentral.com/analysis/inside-spectrum-x-nvidias-ethernet-networking-platform/" target="_blank" rel="noopener">https://www.sdxcentral.com/analysis/inside-spectrum-x-nvidias-ethernet-networking-platform/</a></div>
+  </div>
+  <a class="backtotop" href="#top">↑ Back to top</a>
+</div>
+
+<script>
+  (function() {
+    // Turn any [N] inside .cite and .deps spans into clickable anchor links.
+    // Skip strings that don't look like reference numbers (e.g. leave commas / spaces).
+    var pattern = /\[(P?\d+)\]/g;
+    var spans = document.querySelectorAll('.cite, .deps, .matrix div, .footnote, .layer .layer-meta');
+    spans.forEach(function(el) {
+      // Only operate on text nodes to preserve any existing markup
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+      var nodes = [];
+      var node;
+      while ((node = walker.nextNode())) nodes.push(node);
+      nodes.forEach(function(textNode) {
+        var text = textNode.nodeValue;
+        if (!pattern.test(text)) return;
+        pattern.lastIndex = 0;
+        var frag = document.createDocumentFragment();
+        var lastIdx = 0;
+        var m;
+        while ((m = pattern.exec(text)) !== null) {
+          if (m.index > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, m.index)));
+          var a = document.createElement('a');
+          a.href = '#ref-' + m[1];
+          a.textContent = '[' + m[1] + ']';
+          a.title = 'Jump to reference [' + m[1] + ']';
+          frag.appendChild(a);
+          lastIdx = m.index + m[0].length;
+        }
+        if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+        textNode.parentNode.replaceChild(frag, textNode);
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>

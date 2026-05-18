@@ -343,7 +343,7 @@ Click any citation number <span class="cite">[#]</span> to jump to its source in
       <div class="sub">Kimi chat models</div>
       <div class="role">China-based; trains primarily on domestic GPU/NPU clusters (Huawei Ascend + NVIDIA where available). Ethernet-aligned via Huawei/H3C silicon.</div>
       <div class="badges"><span class="badge b-roce">RoCEv2</span></div>
-      <div class="deps"><span class="cite">[P2][P3]</span></div>
+      <div class="deps"></div>
     </div>
 
     <div class="card neutral">
@@ -388,9 +388,9 @@ Click any citation number <span class="cite">[#]</span> to jump to its source in
     <div class="card hybrid">
       <div class="name">Microsoft Azure ★</div>
       <div class="sub">SONiC + MAIA + custom optics</div>
-      <div class="role">Created and open-sourced <strong>SONiC</strong> switch OS (runs on multi-vendor ASICs incl. Broadcom + NVIDIA Spectrum). Co-develops hollow-core fiber with Huber+Suhner. Designs MAIA accelerator. Still significant NVIDIA InfiniBand for inference.</div>
-      <div class="badges"><span class="badge b-inhouse">★ In-house OS + HCF</span><span class="badge b-sonic">SONiC (owner)</span><span class="badge b-roce">RoCEv2/UEC</span><span class="badge b-ib">InfiniBand</span><span class="badge b-mscl">MSCCL</span></div>
-      <div class="deps"><span class="cite">[16][17][18][59][84]</span></div>
+      <div class="role">Created and open-sourced <strong>SONiC</strong> switch OS (runs on multi-vendor ASICs incl. Broadcom + NVIDIA Spectrum). Co-develops hollow-core fiber with Huber+Suhner. Designs MAIA accelerator. Still significant NVIDIA InfiniBand for inference. <strong>Microsoft co-developed and runs MRC in production</strong> across its largest training clusters (per the OpenAI/Microsoft/AMD/Broadcom/NVIDIA joint paper).</div>
+      <div class="badges"><span class="badge b-inhouse">★ In-house OS + HCF</span><span class="badge b-sonic">SONiC (owner)</span><span class="badge b-roce">RoCEv2/UEC</span><span class="badge b-ib">InfiniBand</span><span class="badge b-mrc">MRC (production)</span><span class="badge b-mscl">MSCCL</span></div>
+      <div class="deps"><span class="cite">[16][17][18][59][84][138]</span></div>
     </div>
 
     <div class="card neutral">
@@ -398,7 +398,7 @@ Click any citation number <span class="cite">[#]</span> to jump to its source in
       <div class="sub">Project Jupiter / Gov't AI campus</div>
       <div class="role">Largely off-the-shelf NVIDIA stack — Quantum InfiniBand + Spectrum-X. Sovereign-cloud focus. No public custom-silicon program.</div>
       <div class="badges"><span class="badge b-ib">InfiniBand</span><span class="badge b-spx">Spectrum-X</span></div>
-      <div class="deps"><span class="cite">[22][P3]</span></div>
+      <div class="deps"><span class="cite">[22]</span></div>
     </div>
 
   </div>
@@ -550,12 +550,14 @@ Click any citation number <span class="cite">[#]</span> to jump to its source in
       <div class="name">Arista Networks (ANET)</div>
       <div class="sub">wraps <span class="arrow">→ Broadcom</span></div>
       <div class="role">
-        <strong>Etherlink AI portfolio:</strong> 7060X6 leaf (Tomahawk 5), 7800R4 spine (Jericho3-AI), 7700R4 <em>Distributed Etherlink Switch</em> — scales to 10K XPUs single-tier, 100K+ XPUs two-tier. Big differentiator is EOS software, not silicon.
+        <strong>Etherlink AI portfolio:</strong> 7060X6 leaf (Tomahawk 5), 7800R4 spine (Jericho3-AI), 7700R4 <em>Distributed Etherlink Switch</em> — scales to 10K XPUs single-tier, 100K+ XPUs two-tier. Big differentiator is EOS software, not silicon.<br>
+        <strong>EOS implements SRv6 on Broadcom Tomahawk 5</strong> for MRC source-routing — co-developed with OpenAI / Microsoft / AMD / Broadcom / NVIDIA.
       </div>
       <div class="badges">
         <span class="badge b-roce">RoCEv2/UEC</span>
-              </div>
-      <div class="deps">Silicon: Broadcom Tomahawk 5/6 + Jericho 3/4 <span class="cite">[36][37][38]</span></div>
+        <span class="badge b-mrc">MRC SRv6 (EOS on TH5)</span>
+      </div>
+      <div class="deps">Silicon: Broadcom Tomahawk 5/6 + Jericho 3/4 <span class="cite">[36][37][38][138]</span></div>
     </div>
 
     <div class="card hybrid">
@@ -580,9 +582,9 @@ Click any citation number <span class="cite">[#]</span> to jump to its source in
     <div class="card builder">
       <div class="name">NVIDIA — BlueField &amp; ConnectX (NICs)</div>
       <div class="sub">DPU / SuperNIC line</div>
-      <div class="role"><strong>BlueField-3</strong> SuperNIC powers Spectrum-X clusters (xAI Colossus reference). <strong>ConnectX-8</strong> supports 800 Gb/s Ethernet + InfiniBand. <strong>Thor-equivalent</strong> for Quantum-X800. NVIDIA's NIC line is the in-house counterpart to AMD Pollara &amp; Intel E810.</div>
-      <div class="badges"><span class="badge b-ib">InfiniBand</span><span class="badge b-spx">Spectrum-X</span><span class="badge b-roce">RoCEv2</span></div>
-      <div class="deps">(Cross-reference with NVIDIA card above) <span class="cite">[22][23]</span></div>
+      <div class="role"><strong>BlueField-3</strong> SuperNIC powers Spectrum-X clusters (xAI Colossus reference). <strong>ConnectX-8</strong> supports 800 Gb/s Ethernet + InfiniBand and ships the <strong>MRC</strong> transport per the joint OpenAI/Microsoft/AMD/Broadcom/NVIDIA paper. Spectrum-4 and Spectrum-5 switches implement <strong>SRv6</strong> under both Cumulus and SONiC for MRC source-routing. <strong>Thor-equivalent</strong> for Quantum-X800. NVIDIA's NIC line is the in-house counterpart to AMD Pollara &amp; Intel E810.</div>
+      <div class="badges"><span class="badge b-ib">InfiniBand</span><span class="badge b-spx">Spectrum-X</span><span class="badge b-roce">RoCEv2</span><span class="badge b-mrc">MRC (ConnectX-8)</span><span class="badge b-sonic">SONiC + Cumulus</span></div>
+      <div class="deps">(Cross-reference with NVIDIA card above) <span class="cite">[22][23][138]</span></div>
     </div>
 
     <div class="card builder">
@@ -604,9 +606,9 @@ Click any citation number <span class="cite">[#]</span> to jump to its source in
     <div class="card builder">
       <div class="name">Broadcom — Thor Ultra</div>
       <div class="sub">800G AI Ethernet NIC</div>
-      <div class="role">Industry-first 800G AI Ethernet NIC; pairs with Tomahawk 6 / Jericho4 to give Broadcom an end-to-end UEC stack. Cross-reference with the Broadcom card above.</div>
-      <div class="badges"><span class="badge b-roce">RoCEv2/UEC</span></div>
-      <div class="deps">(Cross-reference with Broadcom card above) <span class="cite">[27]</span></div>
+      <div class="role">Industry-first 800G AI Ethernet NIC; pairs with Tomahawk 6 / Jericho4 to give Broadcom an end-to-end UEC stack. <strong>Thor Ultra ships MRC</strong> per the joint OpenAI/Microsoft/AMD/Broadcom/NVIDIA paper. Tomahawk 5 implements <strong>SRv6</strong> source-routing for MRC inside Arista EOS. Cross-reference with the Broadcom card above.</div>
+      <div class="badges"><span class="badge b-roce">RoCEv2/UEC</span><span class="badge b-mrc">MRC (Thor Ultra)</span></div>
+      <div class="deps">(Cross-reference with Broadcom card above) <span class="cite">[27][138]</span></div>
     </div>
 
   </div>
@@ -1009,7 +1011,7 @@ Click any citation number <span class="cite">[#]</span> to jump to its source in
       <div class="sub">GF Fotonix silicon-photonics platform</div>
       <div class="role">Monolithic CMOS + silicon photonics platform. Used by <strong>Lightmatter Passage M1000</strong> for 3D photonic interposer. DMEA Cat-1A Trusted Supplier for defense AI work.</div>
       <div class="badges"><span class="badge b-cpo">SiPho foundry</span></div>
-      <div class="deps"><span class="cite">[75][P3]</span></div>
+      <div class="deps"><span class="cite">[75]</span></div>
     </div>
 
     <div class="card builder">
@@ -1017,7 +1019,7 @@ Click any citation number <span class="cite">[#]</span> to jump to its source in
       <div class="sub">silicon-photonics foundry</div>
       <div class="role">~85% historical SiPho foundry share (pre-TSMC ramp) per defense supply-chain mapping. Still the volume foundry for many of today's SiPho PICs.</div>
       <div class="badges"><span class="badge b-cpo">SiPho foundry</span></div>
-      <div class="deps"><span class="cite">[P3]</span></div>
+      <div class="deps"></div>
     </div>
 
   </div>
@@ -1145,17 +1147,17 @@ Click any citation number <span class="cite">[#]</span> to jump to its source in
         </tr>
       </thead>
       <tbody>
-        <tr><td><strong>NVIDIA</strong></td><td class="check">✓ Quantum (owner)</td><td>—</td><td class="dot">· (Spectrum-X is modified RoCEv2)</td><td class="check">✓ owner</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ Spectrum runs SONiC</td><td>—</td></tr>
-        <tr><td><strong>Broadcom</strong></td><td>—</td><td>—</td><td class="check">✓ Tomahawk/Jericho</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
+        <tr><td><strong>NVIDIA</strong></td><td class="check">✓ Quantum (owner)</td><td>—</td><td class="dot">· (Spectrum-X is modified RoCEv2)</td><td class="check">✓ owner</td><td>—</td><td>—</td><td class="check">✓ ConnectX-8 NIC + SRv6 on Spectrum-4/5 [138]</td><td>—</td><td class="check">✓ Spectrum runs SONiC</td><td>—</td></tr>
+        <tr><td><strong>Broadcom</strong></td><td>—</td><td>—</td><td class="check">✓ Tomahawk/Jericho</td><td>—</td><td>—</td><td>—</td><td class="check">✓ Thor Ultra NIC + SRv6 on Tomahawk 5 [138]</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
         <tr><td><strong>Marvell</strong></td><td>—</td><td>—</td><td class="check">✓ Teralynx + DSPs</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
         <tr><td><strong>Cisco</strong></td><td>—</td><td>—</td><td class="check">✓ G300/P200</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
-        <tr><td><strong>Arista</strong></td><td>—</td><td>—</td><td class="check">✓ Etherlink (flagship)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
+        <tr><td><strong>Arista</strong></td><td>—</td><td>—</td><td class="check">✓ Etherlink (flagship)</td><td>—</td><td>—</td><td>—</td><td class="check">✓ SRv6 in EOS on Broadcom TH5 [138]</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
         <tr><td><strong>HPE</strong></td><td>—</td><td>—</td><td class="check">✓ Slingshot</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ Aruba supports</td><td>—</td></tr>
         <tr><td><strong>Intel (E810)</strong></td><td>—</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td><td class="check">✓ Falcon on E2100 IPU</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td></tr>
-        <tr><td><strong>AMD (Pollara / Vulcano)</strong></td><td>—</td><td>—</td><td class="check">✓ UEC-first NIC</td><td>—</td><td>—</td><td>—</td><td class="check">✓ Vulcano 800</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>AMD (Pollara / Vulcano)</strong></td><td>—</td><td>—</td><td class="check">✓ UEC-first NIC</td><td>—</td><td>—</td><td>—</td><td class="check">✓ Pollara + Vulcano 800 [138]</td><td>—</td><td>—</td><td>—</td></tr>
         <tr><td><strong>Cornelis Networks</strong></td><td class="dot">· (compares against)</td><td class="check">✓ owner (CN5000)</td><td class="check">✓ CN6000+ unified</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
         <tr><td><strong>Upscale AI</strong></td><td>—</td><td>—</td><td class="check">✓ UEC/ESUN</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ supported</td><td>—</td></tr>
-        <tr><td><strong>Microsoft Azure</strong></td><td class="check">✓ for some clusters</td><td>—</td><td class="check">✓ UEC</td><td class="dot">· (consumer)</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ owner</td><td>—</td></tr>
+        <tr><td><strong>Microsoft Azure</strong></td><td class="check">✓ for some clusters</td><td>—</td><td class="check">✓ UEC</td><td class="dot">· (consumer)</td><td>—</td><td>—</td><td class="check">✓ production deployment [138]</td><td>—</td><td class="check">✓ owner</td><td>—</td></tr>
         <tr><td><strong>AWS</strong></td><td>—</td><td>—</td><td class="dot">· (legacy)</td><td>—</td><td class="check">✓ owner (Nitro/EFA)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
         <tr><td><strong>Google</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="check">✓ owner (HW transport)</td><td>—</td><td>—</td><td>—</td><td class="check">✓ owner</td></tr>
         <tr><td><strong>xAI Colossus</strong></td><td>—</td><td>—</td><td class="dot">·</td><td class="check">✓ flagship</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -1169,7 +1171,7 @@ Click any citation number <span class="cite">[#]</span> to jump to its source in
         <tr><td><strong>CoreWeave / Lambda / Nebius</strong></td><td class="check">✓ flagship</td><td>—</td><td class="dot">·</td><td class="dot">·</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
       </tbody>
     </table>
-    <div style="font-size:11px; color:var(--muted); margin-top:6px;">Sources: <span class="cite">[2][4][9][10][14][15][16][17][19][20][22][23][24][27][29][33][36][39][46][56][76][77][78][89][91][94][95][96][97][98][127][129][130][131][137]</span></div>
+    <div style="font-size:11px; color:var(--muted); margin-top:6px;">Sources: <span class="cite">[2][4][9][10][14][15][16][17][19][20][22][23][24][27][29][33][36][39][46][56][76][77][78][89][91][94][95][96][97][98][127][129][130][131][137][138]</span></div>
   </div>
 
   <!-- GROUP 3 — COMMUNICATION LIBRARIES -->
@@ -1325,7 +1327,7 @@ Last verified: <strong>2026-05-17</strong>.<br><br>
 <!-- =================== REFERENCES =================== -->
 <div class="refs-section" id="references">
   <h2>References</h2>
-  <div class="refs-sub">137 sources. Click any <span class="cite">[#]</span> citation above to jump here. Last verified May 17, 2026.</div>
+  <div class="refs-sub">138 sources. Click any <span class="cite">[#]</span> citation above to jump here. Last verified May 17, 2026.</div>
   <div class="refs-grid">
   <div class="refitem" id="ref-1"><span class="refnum">[1]</span> xAI, "Colossus: The World's Largest AI Supercomputer." — Confirms 100K → 200K NVIDIA Hopper GPUs on Spectrum-X Ethernet <a href="https://x.ai/colossus" target="_blank" rel="noopener">https://x.ai/colossus</a></div>
   <div class="refitem" id="ref-2"><span class="refnum">[2]</span> NVIDIA Newsroom, "NVIDIA Ethernet Networking Accelerates World's Largest AI Supercomputer, Built by xAI." — Spectrum-X 95% throughput vs 60% standard Ethernet <a href="https://nvidianews.nvidia.com/news/spectrum-x-ethernet-networking-xai-colossus" target="_blank" rel="noopener">https://nvidianews.nvidia.com/news/spectrum-x-ethernet-networking-xai-colossus</a></div>
@@ -1464,6 +1466,7 @@ Last verified: <strong>2026-05-17</strong>.<br><br>
   <div class="refitem" id="ref-135"><span class="refnum">[135]</span> Credo / DustPhotonics deal release language (2026) — explicit NPO + CPO targeting on DustPhotonics PIC roadmap <a href="https://www.businesswire.com/news/home/20260413933103/en/Credo-Agrees-to-Acquire-DustPhotonics-Accelerating-Expansion-into-Silicon-Photonics-and-Next-Generation-Optical-Connectivity" target="_blank" rel="noopener">https://www.businesswire.com/news/home/20260413933103/en/Credo-Agrees-to-Acquire-DustPhotonics-Accelerating-Expansion-into-Silicon-Photonics-and-Next-Generation-Optical-Connectivity</a></div>
   <div class="refitem" id="ref-136"><span class="refnum">[136]</span> Lightwave Online, "Credo's DustPhotonics acquisition solidifies its AI interconnect position." — NPO/CPO context for hyperscale AI optical roadmap <a href="https://www.lightwaveonline.com/home/article/55370917/credos-dustphotonics-acquisition-solidifies-its-ai-interconnect-position" target="_blank" rel="noopener">https://www.lightwaveonline.com/home/article/55370917/credos-dustphotonics-acquisition-solidifies-its-ai-interconnect-position</a></div>
   <div class="refitem" id="ref-137"><span class="refnum">[137]</span> SDxCentral, "Inside Spectrum-X: NVIDIA's Ethernet networking platform." — Spectrum-X is the platform brand for NVIDIA's modified-RoCEv2 stack on Spectrum-4/Spectrum-6 silicon + BlueField SuperNICs. Not a separate transport protocol <a href="https://www.sdxcentral.com/analysis/inside-spectrum-x-nvidias-ethernet-networking-platform/" target="_blank" rel="noopener">https://www.sdxcentral.com/analysis/inside-spectrum-x-nvidias-ethernet-networking-platform/</a></div>
+  <div class="refitem" id="ref-138"><span class="refnum">[138]</span> OpenAI / Microsoft / AMD / Broadcom / NVIDIA joint whitepaper, "Resilient AI Supercomputer Networking using MRC and SRv6." — Authoritative implementation list: MRC on NVIDIA ConnectX-8, AMD Pollara + Vulcano, Broadcom Thor Ultra; SRv6 on NVIDIA Spectrum-4/Spectrum-5 (Cumulus + SONiC) and on Broadcom Tomahawk 5 inside Arista EOS. In production at OpenAI and Microsoft training frontier LLMs for ChatGPT and Codex. Spec released via OCP under an open license. (User-supplied PDF, 2026.)</div>
   </div>
   <a class="backtotop" href="#top">↑ Back to top</a>
 </div>
